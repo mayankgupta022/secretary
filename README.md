@@ -1,4 +1,4 @@
 secretary
 =========
 
-My notes, diary, collaborative whiteboard
+Notes, diary, collaborative whiteboard

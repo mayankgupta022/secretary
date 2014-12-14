@@ -1,7 +1,7 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import json
 # Create your views here.
@@ -56,6 +56,7 @@ def userSignUp(request):
 
 
 @csrf_exempt
+@login_required
 def userChangePass(request):
 	info = dict()
 	username = request.user.username
@@ -81,4 +82,36 @@ def userChangePass(request):
 		else:
 			info["status"] = 1
 			info["msg"] = "invalid"
+	return HttpResponse(json.dumps(info))
+
+
+@csrf_exempt
+def userGetInfo(request):
+	info = dict()
+	if request.user.is_anonymous():
+		info["status"] = 0
+		info["msg"] = "getInfo"
+		info["username"] = "anon"
+		info["first_name"] = "Anon"
+		info["last_name"] = ""
+		info["email"] = ""
+	else:
+		info["status"] = 1
+		info["msg"] = "getInfo"
+		info["username"] = request.user.username
+		info["first_name"] = request.user.first_name
+		info["last_name"] = request.user.last_name
+		info["email"] = request.user.email
+	return HttpResponse(json.dumps(info))
+
+
+@csrf_exempt
+@login_required
+def userSetInfo(request):
+	info = dict()
+	request.user.first_name = request.POST.get('first_name', request.user.first_name)
+	request.user.last_name = request.POST.get('last_name', request.user.last_name)
+	request.user.save()
+	info["status"] = 0
+	info["msg"] = "setInfo"
 	return HttpResponse(json.dumps(info))

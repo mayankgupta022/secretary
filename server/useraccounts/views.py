@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 # Create your views here.
 
+
 @csrf_exempt
 def userLogin(request):
 	info = dict()
@@ -27,6 +28,7 @@ def userLogin(request):
 		info["msg"] = "invalid"
 	return HttpResponse(json.dumps(info))
 
+
 @csrf_exempt
 def userLogout(request):
 	info = dict()
@@ -45,13 +47,17 @@ def userSignUp(request):
 	last_name = request.POST.get('last_name', '')
 	email = request.POST['email']
 	password = request.POST['password']
-	
-	user = User.objects.create_user(username, email, password)
-	user.first_name = first_name
-	user.last_name = last_name
-	user.save()
-	info["status"] = 0
-	info["msg"] = "signUp"
+
+	if User.objects.filter(username = username):
+		info["status"] = 1
+		info["msg"] = "alreadyExists"
+	else:
+		user = User.objects.create_user(username, email, password)
+		user.first_name = first_name
+		user.last_name = last_name
+		user.save()
+		info["status"] = 0
+		info["msg"] = "signUp"
 	return HttpResponse(json.dumps(info))
 
 
@@ -109,8 +115,10 @@ def userGetInfo(request):
 @login_required
 def userSetInfo(request):
 	info = dict()
+
 	request.user.first_name = request.POST.get('first_name', request.user.first_name)
 	request.user.last_name = request.POST.get('last_name', request.user.last_name)
+	
 	request.user.save()
 	info["status"] = 0
 	info["msg"] = "setInfo"

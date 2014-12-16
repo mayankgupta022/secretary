@@ -96,18 +96,17 @@ def userGetInfo(request):
 	info = dict()
 	if request.user.is_anonymous():
 		info["status"] = 0
-		info["msg"] = "getInfo"
 		info["username"] = "anon"
 		info["first_name"] = "Anon"
 		info["last_name"] = ""
 		info["email"] = ""
 	else:
 		info["status"] = 1
-		info["msg"] = "getInfo"
 		info["username"] = request.user.username
 		info["first_name"] = request.user.first_name
 		info["last_name"] = request.user.last_name
 		info["email"] = request.user.email
+	info["msg"] = "getInfo"
 	return HttpResponse(json.dumps(info))
 
 

@@ -60,14 +60,10 @@ def newNotebook(request):
 def newPage(request):
 	info = dict()
 
-	if 'notebook' not in request.POST:
-		notebook = Notebook.objects.filter(owner = request.user.username, priority = 0)[0]
-	else:
-		notebook = Notebook.objects.filter(pk = request.POST.get('notebook'))[0]
 	page = Page.objects.create(
 				owner = request.user.username,
 				name = request.POST.get('name', str(datetime.now())),
-				notebook = notebook,
+				notebook = request.POST.get('notebook', Notebook.objects.filter(owner = request.user.username, priority = 0)[0]),
 				context = request.POST.get('context', 0),
 				active = request.POST.get('active', 0),
 				priority = request.POST.get('priority', 0),

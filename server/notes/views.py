@@ -8,7 +8,7 @@ from datetime import datetime
 from common.utils import model_to_json, collection_to_json
 # Create your views here.
 
-@csrf_exempt
+
 @login_required
 def home(request, i = 10):
 	info = dict()
@@ -20,7 +20,6 @@ def home(request, i = 10):
 	return HttpResponse(json.dumps(info))
 
 
-@csrf_exempt
 @login_required
 def trash(request):
 	info = dict()
@@ -32,7 +31,6 @@ def trash(request):
 	return HttpResponse(json.dumps(info))
 
 
-@csrf_exempt
 @login_required
 def newBoard(request):
 	info = dict()
@@ -59,7 +57,6 @@ def newBoard(request):
 	return HttpResponse(json.dumps(info))
 
 
-@csrf_exempt
 @login_required
 def newNote(request):
 	info = dict()
@@ -86,7 +83,6 @@ def newNote(request):
 	return HttpResponse(json.dumps(info))
 
 
-@csrf_exempt
 @login_required
 def delBoard(request,  i = -1):
 	info = dict()
@@ -108,7 +104,6 @@ def delBoard(request,  i = -1):
 	return HttpResponse(json.dumps(info))
 
 
-@csrf_exempt
 @login_required
 def delNote(request, i = -1):
 	info = dict()
@@ -126,7 +121,6 @@ def delNote(request, i = -1):
 
 	return HttpResponse(json.dumps(info))
 
-@csrf_exempt
 @login_required
 def restoreNote(request, i = -1):
 	info = dict()
@@ -141,7 +135,6 @@ def restoreNote(request, i = -1):
 	return HttpResponse(json.dumps(info))
 
 
-@csrf_exempt
 @login_required
 def board(request, i = 0):
 	info = dict()
@@ -171,7 +164,6 @@ def board(request, i = 0):
 	return HttpResponse(json.dumps(info))
 
 
-@csrf_exempt
 @login_required
 def boards(request):
 	info = dict()
@@ -182,7 +174,6 @@ def boards(request):
 	return HttpResponse(json.dumps(info))
 
 
-@csrf_exempt
 @login_required
 def note(request, i = 0):
 	info = dict()
@@ -212,7 +203,6 @@ def note(request, i = 0):
 
 	return HttpResponse(json.dumps(info))
 
-@csrf_exempt
 @login_required
 def makeDefaultBoard(request, i = 0):
 	info = dict()

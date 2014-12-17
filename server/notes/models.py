@@ -6,7 +6,6 @@ from django.core.files.storage import FileSystemStorage
 class Board(models.Model):
 	owner = models.CharField(max_length = 300)
 	name = models.CharField(max_length = 300)
-	parent = models.IntegerField(max_length = 10, default = 0)
 	created = models.DateTimeField(auto_now_add = True)
 	updated = models.DateTimeField(auto_now = True)
 	priority = models.IntegerField(max_length = 10, default = 0)

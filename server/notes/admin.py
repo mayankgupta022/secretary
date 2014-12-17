@@ -4,9 +4,9 @@ from notes.models import *
 
 
 class BoardAdmin(admin.ModelAdmin):
-	list_display = ('owner', 'name', 'parent', 'created', 'updated', 'priority', 'attr1', 'attr2')
-	search_fields = ('owner', 'name', 'parent', 'created', 'updated', 'priority', 'attr1', 'attr2')
-	list_filter = ('owner', 'name', 'parent', 'created', 'updated', 'priority', 'attr1', 'attr2')
+	list_display = ('owner', 'name', 'created', 'updated', 'priority', 'attr1', 'attr2')
+	search_fields = ('owner', 'name', 'created', 'updated', 'priority', 'attr1', 'attr2')
+	list_filter = ('owner', 'name', 'created', 'updated', 'priority', 'attr1', 'attr2')
 	date_heirarchy = ('created', 'updated')
 #	filter_horizontal = ('attr1', 'attr2')
 

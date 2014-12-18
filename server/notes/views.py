@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from notes.models import *
 import json
-from datetime import datetime
 from common.utils import model_to_json, collection_to_json
 # Create your views here.
 
@@ -12,9 +11,13 @@ from common.utils import model_to_json, collection_to_json
 def home(request, i = 10):
 	info = dict()
 
-	notes = Note.objects.filter(owner = request.user.username, active = 0).order_by('priority', '-updated')[:i]
-	info["status"] = 0
-	info["notes"] = collection_to_json(notes)
+	try:
+		notes = Note.objects.filter(owner = request.user.username, active = 0).order_by('priority', '-updated')[:i]
+		info["status"] = 0
+		info["notes"] = collection_to_json(notes)
+	except Exception as e:
+		info["status"] = 1
+		info["msg"] = e.message + type(e)
 
 	return HttpResponse(json.dumps(info))
 
@@ -23,16 +26,20 @@ def home(request, i = 10):
 def delNote(request, i = -1):
 	info = dict()
 
-	note = Note.objects.filter(pk = i)[0]
-	if note.active == 0:
-		note.active = 1
-		note.save()
-		info["active"] = 1
-	else:
-		note.delete()
-		info["active"] = 2
-	info["status"] = 0
-	info["delNote"] = i
+	try:
+		note = Note.objects.filter(pk = i)[0]
+		if note.active == 0:
+			note.active = 1
+			note.save()
+			info["active"] = 1
+		else:
+			note.delete()
+			info["active"] = 2
+		info["status"] = 0
+		info["delNote"] = i
+	except Exception as e:
+		info["status"] = 1
+		info["msg"] = e.message + type(e)
 
 	return HttpResponse(json.dumps(info))
 
@@ -41,19 +48,23 @@ def delNote(request, i = -1):
 def newNote(request):
 	info = dict()
 
-	note = Note.objects.create(
-				owner = request.user.username,
-				name = request.POST.get('name', 'Note ' + str(Note.objects.filter(owner = request.user.username).count() + 1)),
-				context = request.POST.get('context', 0),
-				active = request.POST.get('active', 0),
-				priority = request.POST.get('priority', 0),
-				attr1 = request.POST.get('attr1', ""),
-				attr2 = request.POST.get('attr2', ""),
-				content = request.POST.get('content', ""),
-			)
-	note.save()
-	info["status"] = 0
-	info["newNote"] = note.pk
+	try:
+		note = Note.objects.create(
+					owner = request.user.username,
+					name = request.POST.get('name', 'Note ' + str(Note.objects.filter(owner = request.user.username).count() + 1)),
+					context = request.POST.get('context', 0),
+					active = request.POST.get('active', 0),
+					priority = request.POST.get('priority', 0),
+					attr1 = request.POST.get('attr1', ""),
+					attr2 = request.POST.get('attr2', ""),
+					content = request.POST.get('content', ""),
+				)
+		note.save()
+		info["status"] = 0
+		info["newNote"] = note.pk
+	except Exception as e:
+		info["status"] = 1
+		info["msg"] = e.message + type(e)
 
 	return HttpResponse(json.dumps(info))
 
@@ -62,26 +73,30 @@ def newNote(request):
 def note(request, i = 0):
 	info = dict()
 
-	note = Note.objects.filter(pk = i)[0]
+	try:
+		note = Note.objects.filter(pk = i)[0]
 
-	if request.method == "POST":
-		if 'name' in request.POST:
-			note.name = request.POST['name']
-		if 'priority' in request.POST:
-			note.priority = request.POST['priority']
-		if 'attr1' in request.POST:
-			note.attr1 = request.POST['attr1'],
-		if 'attr2' in request.POST:
-			note.attr2 = request.POST['attr2'],
-		if 'content' in request.POST:
-			note.content = request.POST['content']
-		note.save();
-		info["status"] = 0
-		info["msg"] = "CHANGED"
-	else:
+		if request.method == "POST":
+			if 'name' in request.POST:
+				note.name = request.POST['name']
+			if 'priority' in request.POST:
+				note.priority = request.POST['priority']
+			if 'attr1' in request.POST:
+				note.attr1 = request.POST['attr1'],
+			if 'attr2' in request.POST:
+				note.attr2 = request.POST['attr2'],
+			if 'content' in request.POST:
+				note.content = request.POST['content']
+			note.save();
+			info["status"] = 0
+			info["msg"] = "CHANGED"
+		else:
+			info["status"] = 0
+			info["msg"] = "NOCHANGE"
+		info["note"] = model_to_json(note)
+	except Exception as e:
 		info["status"] = 1
-		info["msg"] = "NOCHANGE"
-	info["note"] = model_to_json(note)
+		info["msg"] = e.message + type(e)
 
 	return HttpResponse(json.dumps(info))
 
@@ -90,12 +105,16 @@ def note(request, i = 0):
 def restoreNote(request, i = -1):
 	info = dict()
 
-	note = Note.objects.filter(pk = i)[0]
-	note.active = 0
-	note.save()
-	info["active"] = 0
-	info["status"] = 0
-	info["restoreNote"] = i
+	try:
+		note = Note.objects.filter(pk = i)[0]
+		note.active = 0
+		note.save()
+		info["active"] = 0
+		info["status"] = 0
+		info["restoreNote"] = i
+	except Exception as e:
+		info["status"] = 1
+		info["msg"] = e.message + type(e)
 
 	return HttpResponse(json.dumps(info))
 
@@ -104,8 +123,12 @@ def restoreNote(request, i = -1):
 def trash(request):
 	info = dict()
 
-	notes = Note.objects.filter(owner = request.user.username, active = 1).order_by('-updated')
-	info["status"] = 0
-	info["notes"] = collection_to_json(notes)
+	try:
+		notes = Note.objects.filter(owner = request.user.username, active = 1).order_by('-updated')
+		info["status"] = 0
+		info["notes"] = collection_to_json(notes)
+	except Exception as e:
+		info["status"] = 1
+		info["msg"] = e.message + type(e)
 
 	return HttpResponse(json.dumps(info))

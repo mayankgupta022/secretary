@@ -3,9 +3,22 @@ from django.core.files.storage import FileSystemStorage
 # Create your models here.
 
 
+class Stack(models.Model):
+	owner = models.CharField(max_length = 300)
+	name = models.CharField(max_length = 300)
+	created = models.DateTimeField(auto_now_add = True)
+	updated = models.DateTimeField(auto_now = True)
+	priority = models.IntegerField(max_length = 10, default = 0)
+	attr1 = models.CharField(max_length = 300, blank = True)
+	attr2 = models.CharField(max_length = 300, blank = True)
+	def __unicode__(self):
+		return self.name
+
+
 class Notebook(models.Model):
 	owner = models.CharField(max_length = 300)
 	name = models.CharField(max_length = 300)
+	stack = models.IntegerField(max_length = 10, default = 0)
 	created = models.DateTimeField(auto_now_add = True)
 	updated = models.DateTimeField(auto_now = True)
 	priority = models.IntegerField(max_length = 10, default = 0)

@@ -12,7 +12,7 @@ from common.utils import model_to_json, collection_to_json
 def home(request, i = 10):
 	info = dict()
 
-	notes = Note.objects.filter(owner = request.user.username, active = 0).order_by('-updated')[:i]
+	notes = Note.objects.filter(owner = request.user.username, active = 0).order_by('priority', '-updated')[:i]
 	info["status"] = 0
 	info["notes"] = collection_to_json(notes)
 
@@ -43,7 +43,7 @@ def newNote(request):
 
 	note = Note.objects.create(
 				owner = request.user.username,
-				name = request.POST.get('name', str(datetime.now())),
+				name = request.POST.get('name', 'Note ' + str(Note.objects.filter(owner = request.user.username).count() + 1)),
 				context = request.POST.get('context', 0),
 				active = request.POST.get('active', 0),
 				priority = request.POST.get('priority', 0),

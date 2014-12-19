@@ -17,7 +17,7 @@ def home(request, i = 10):
 		info["notes"] = collection_to_json(notes)
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -39,7 +39,7 @@ def delNote(request, i = -1):
 		info["delNote"] = i
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -64,7 +64,7 @@ def newNote(request):
 		info["newNote"] = note.pk
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -96,7 +96,7 @@ def note(request, i = 0):
 		info["note"] = model_to_json(note)
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -114,7 +114,7 @@ def restoreNote(request, i = -1):
 		info["restoreNote"] = i
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -129,6 +129,6 @@ def trash(request):
 		info["notes"] = collection_to_json(notes)
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))

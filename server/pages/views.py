@@ -17,7 +17,7 @@ def home(request, i = 10):
 		info["pages"] = collection_to_json(pages)
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -42,7 +42,7 @@ def delNotebook(request,  i = -1):
 		info["delNotebook"] = i
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -64,7 +64,7 @@ def delPage(request, i = -1):
 		info["delPage"] = i
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -84,7 +84,7 @@ def delStack(request,  i = -1):
 		info["delStack"] = i
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -105,7 +105,7 @@ def makeDefaultNotebook(request, i = 0):
 		info["newNotebook"] = model_to_json(newNotebook)
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -136,7 +136,7 @@ def newNotebook(request):
 		info["newNotebook"] = notebook.pk
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -146,10 +146,14 @@ def newPage(request):
 	info = dict()
 
 	try:
+		if 'notebook' in request.POST:
+			notebook = Notebook.objects.filter(owner = request.user.username, notebook = request.POST['notebook'])[0]
+		else:
+			notebook = Notebook.objects.filter(owner = request.user.username, priority = 0)[0]
 		page = Page.objects.create(
 					owner = request.user.username,
 					name = request.POST.get('name', 'Untitled ' + str(Page.objects.filter(owner = request.user.username).count() + 1)),
-					notebook = request.POST.get('notebook', Notebook.objects.filter(owner = request.user.username, priority = 0)[0]),
+					notebook = notebook,
 					context = request.POST.get('context', 0),
 					active = request.POST.get('active', 0),
 					priority = request.POST.get('priority', 0),
@@ -162,7 +166,7 @@ def newPage(request):
 		info["newPage"] = page.pk
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -184,7 +188,7 @@ def newStack(request):
 		info["newStack"] = stack.pk
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -202,7 +206,8 @@ def notebook(request, i = 0):
 			if 'stack' in request.POST:
 				notebook.stack = request.POST['stack']
 			if 'priority' in request.POST:
-				notebook.priority = request.POST['priority']
+				if notebook.priority != 0 and request.POST['priority'] !=0:
+					notebook.priority = request.POST['priority']
 			if 'attr1' in request.POST:
 				notebook.attr1 = request.POST['attr1'],
 			if 'attr2' in request.POST:
@@ -218,7 +223,7 @@ def notebook(request, i = 0):
 		info["childPages"] = collection_to_json(childPages)
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -233,7 +238,7 @@ def notebooks(request):
 		info["notebooks"] = collection_to_json(notebooks)
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -262,12 +267,12 @@ def page(request, i = 0):
 			info["msg"] = "CHANGED"
 		else:
 			info["msg"] = "NOCHANGE"
-		
+
 		info["status"] = 0
 		info["page"] = model_to_json(page)
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -299,7 +304,7 @@ def stack(request, i = 0):
 		info["childNotebooks"] = collection_to_json(childPages)
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -314,7 +319,7 @@ def stacks(request):
 		info["stacks"] = collection_to_json(stacks)
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -332,7 +337,7 @@ def restorePage(request, i = -1):
 		info["restorePage"] = i
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))
 
@@ -347,6 +352,6 @@ def trash(request):
 		info["pages"] = collection_to_json(pages)
 	except Exception as e:
 		info["status"] = 1
-		info["msg"] = e.message + type(e)
+		info["msg"] = e.message + str(type(e))
 
 	return HttpResponse(json.dumps(info))

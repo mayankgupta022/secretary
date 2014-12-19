@@ -17,5 +17,5 @@ urlpatterns = patterns('',
     url(r'^stack/(\d+)/$', 'pages.views.stack', name='pagesStack'),
     url(r'^stacks/$', 'pages.views.stacks', name='pagesStacks'),
     url(r'^restorePage/(\d+)/$', 'pages.views.restorePage', name='pagesRestorePage'),
-    url(r'^trash/$$', 'notes.views.trash', name='notesTrash'),
+    url(r'^trash/$$', 'pages.views.trash', name='pagesTrash'),
 )

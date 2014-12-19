@@ -6,7 +6,7 @@ from pages.models import *
 @admin.register(Notebook)
 class NotebookAdmin(admin.ModelAdmin):
 	list_display = ('name', 'owner', 'stack', 'created', 'updated', 'priority', 'attr1', 'attr2')
-	search_fields = ('name', 'owner', 'stack',)
+	search_fields = ('name', 'owner', 'stack')
 	list_filter = ('owner', 'created', 'updated', 'attr1', 'attr2')
 	date_heirarchy = 'updated'
 

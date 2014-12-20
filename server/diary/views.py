@@ -5,7 +5,7 @@ from diary.models import *
 from django.db.models import Q
 import json
 from common.utils import model_to_json, collection_to_json
-from datetime import datetime
+from datetime import datetime, timedelta
 # Create your views here.
 
 
@@ -210,7 +210,8 @@ def newDay(request):
 						attr1 = request.POST.get('attr1', ""),
 						attr2 = request.POST.get('attr2', "")
 					)
-			events = Event.objects.filter(calender = Calender.objects.filter(owner = request.user.username), start__date__lte = date, end__date__gte = date).order_by('priority','start')
+			events = Event.objects.filter(calender = Calender.objects.filter(owner = request.user.username), start__lte = datetime.combine(date + timedelta(days=1), datetime.min.time()), end__gte = datetime.combine(date, datetime.min.time())).order_by('priority','start')
+			info["c"] = events.count()
 			for event in events:
 				nDay.content += event.desc + "\n"
 			nDay.save()
@@ -247,13 +248,13 @@ def calender(request, i = 0):
 			mode = request.GET.get('mode', 'month')
 			ref = request.GET.get('ref', datetime.now())
 			if mode == 'time':
-				childEvents = Event.objects.filter(calender = calender.pk, start__data__lte = ref.date(), end__gte = ref).order_by('start')
+				childEvents = Event.objects.filter(calender = calender.pk, start__lte = datetime.combine(ref.date(), datetime.max.time()), end__gte = ref).order_by('start')
 			elif mode == 'day':
-				childEvents = Event.objects.filter(calender = calender.pk, start__date__lte = ref.date(), end__date__gte = ref.date()).order_by('start')
+				childEvents = Event.objects.filter(calender = calender.pk, start__lte = datetime.combine(ref.date(), datetime.max.time()), end__gte = datetime.combine(ref.date(), datetime.min.time())).order_by('start')
 			elif mode == 'week':
-				childEvents = Event.objects.filter(calender = calender.pk, start__date__lte = ref.date() + timedelta(6), end__date__gte = ref.date()).order_by('start')
+				childEvents = Event.objects.filter(calender = calender.pk, start__lte = datetime.combine(ref.date() + timedelta(days=7), datetime.min.time()), end__gte = datetime.combine(ref.date(), datetime.min.time())).order_by('start')
 			else:
-				childEvents = Event.objects.filter(calender = calender.pk, start__month__lte = ref.month, end__month__gte = ref.month, start__year__lte = ref.year, end__year__gte = ref.year).order_by('start')
+				childEvents = Event.objects.filter(calender = calender.pk, start__month = ref.month, end__month = ref.month, start__year = ref.year, end__year = ref.year).order_by('start')
 			info["childEvents"] = collection_to_json(childEvents)
 
 		info["status"] = 0

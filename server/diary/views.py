@@ -246,15 +246,9 @@ def calender(request, i = 0):
 		else:
 			info["msg"] = "NOCHANGE"
 			mode = request.GET.get('mode', 'month')
-			ref = request.GET.get('ref', datetime.now())
-			if mode == 'time':
-				childEvents = Event.objects.filter(calender = calender.pk, start__lte = datetime.combine(ref.date(), datetime.max.time()), end__gte = ref).order_by('start')
-			elif mode == 'day':
-				childEvents = Event.objects.filter(calender = calender.pk, start__lte = datetime.combine(ref.date(), datetime.max.time()), end__gte = datetime.combine(ref.date(), datetime.min.time())).order_by('start')
-			elif mode == 'week':
-				childEvents = Event.objects.filter(calender = calender.pk, start__lte = datetime.combine(ref.date() + timedelta(days=7), datetime.min.time()), end__gte = datetime.combine(ref.date(), datetime.min.time())).order_by('start')
-			else:
-				childEvents = Event.objects.filter(calender = calender.pk, start__month = ref.month, end__month = ref.month, start__year = ref.year, end__year = ref.year).order_by('start')
+			start = request.GET.get('start', datetime.now())
+			end = request.GET.get('end', datetime.now() + timedelta(days = 1))
+			childEvents = Event.objects.filter(calender = calender.pk, start__lte = end, end__gte = start).order_by('start')
 			info["childEvents"] = collection_to_json(childEvents)
 
 		info["status"] = 0

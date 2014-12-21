@@ -8,5 +8,5 @@ urlpatterns = patterns('',
     url(r'^newNote/$', 'notes.views.newNote', name='notesNewNote'),
     url(r'^note/(\d+)/$', 'notes.views.note', name='notesNote'),
     url(r'^restoreNote/(\d+)/$', 'notes.views.restoreNote', name='notesRestoreNote'),
-    url(r'^trash/$$', 'notes.views.trash', name='notesTrash'),
+    url(r'^trash/$', 'notes.views.trash', name='notesTrash'),
 )

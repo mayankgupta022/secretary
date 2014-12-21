@@ -131,7 +131,6 @@ def newNotebook(request):
 					attr1 = request.POST.get('attr1', ""),
 					attr2 = request.POST.get('attr2', "")
 				)
-		notebook.save()
 		info["status"] = 0
 		info["newNotebook"] = notebook.pk
 	except Exception as e:
@@ -161,7 +160,6 @@ def newPage(request):
 					attr2 = request.POST.get('attr2', ""),
 					content = request.POST.get('content', ""),
 				)
-		page.save()
 		info["status"] = 0
 		info["newPage"] = page.pk
 	except Exception as e:
@@ -183,7 +181,6 @@ def newStack(request):
 					attr1 = request.POST.get('attr1', ""),
 					attr2 = request.POST.get('attr2', "")
 				)
-		stack.save()
 		info["status"] = 0
 		info["newStack"] = stack.pk
 	except Exception as e:

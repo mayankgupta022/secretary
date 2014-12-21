@@ -59,7 +59,6 @@ def newNote(request):
 					attr2 = request.POST.get('attr2', ""),
 					content = request.POST.get('content', ""),
 				)
-		note.save()
 		info["status"] = 0
 		info["newNote"] = note.pk
 	except Exception as e:

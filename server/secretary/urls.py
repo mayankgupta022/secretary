@@ -13,5 +13,6 @@ urlpatterns = patterns('',
     url(r'^diary/', include('diary.urls')),
     url(r'^notes/', include('notes.urls')),
     url(r'^pages/', include('pages.urls')),
+    url(r'^tags/', include('tags.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

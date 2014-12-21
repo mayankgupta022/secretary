@@ -16,5 +16,5 @@ urlpatterns = patterns('',
     url(r'^calender/(\d+)/$', 'diary.views.calender', name='diaryCalender'),
     url(r'^calenders/$', 'diary.views.calenders', name='diaryCalenders'),
     url(r'^restoreEvent/(\d+)/$', 'diary.views.restoreEvent', name='diaryRestoreEvent'),
-    url(r'^trash/$$', 'diary.views.trash', name='diaryTrash'),
+    url(r'^trash/$', 'diary.views.trash', name='diaryTrash'),
 )

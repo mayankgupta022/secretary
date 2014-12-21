@@ -2,7 +2,6 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from diary.models import *
-from django.db.models import Q
 import json
 from common.utils import model_to_json, collection_to_json
 from datetime import datetime, timedelta
@@ -27,7 +26,6 @@ def home(request, i = 10):
 @login_required
 def day(request, i = 0):
 	info = dict()
-	info["sf"] = i
 	try:
 
 		day = Day.objects.filter(pk = i)[0]
@@ -153,7 +151,6 @@ def newCalender(request):
 					attr1 = request.POST.get('attr1', ""),
 					attr2 = request.POST.get('attr2', "")
 				)
-		calender.save()
 		info["status"] = 0
 		info["newCalender"] = calender.pk
 	except Exception as e:
@@ -185,7 +182,6 @@ def newEvent(request):
 					attr2 = request.POST.get('attr2', ""),
 					desc = request.POST.get('content', ""),
 				)
-		event.save()
 		info["status"] = 0
 		info["newEvent"] = event.pk
 	except Exception as e:
@@ -211,10 +207,8 @@ def newDay(request):
 						attr2 = request.POST.get('attr2', "")
 					)
 			events = Event.objects.filter(calender = Calender.objects.filter(owner = request.user.username), start__lte = datetime.combine(date + timedelta(days=1), datetime.min.time()), end__gte = datetime.combine(date, datetime.min.time())).order_by('priority','start')
-			info["c"] = events.count()
 			for event in events:
 				nDay.content += event.desc + "\n"
-			nDay.save()
 			info["status"] = 0
 			info["newDay"] = nDay.pk
 	except Exception as e:

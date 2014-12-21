@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'diary',
     'notes',
     'pages',
+    'tags',
 )
 
 MIDDLEWARE_CLASSES = (

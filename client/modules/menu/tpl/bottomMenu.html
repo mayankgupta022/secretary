@@ -1,0 +1,51 @@
+<% if (visible === true) { %>
+    <div class="navbar navbar-fixed-bottom navbar-default text-center bottomMenuModule">
+        <div class="row">
+            <% if (left.visible === true) { %>
+                <div class="col-xs-<%= 12/(~~left.visible + ~~middle.visible + ~~right.visible) %> my-bottomMenuLink">
+                    <% if (left.route !== '') { %>
+                        <a href="#<%= left.route %>">
+                    <% } %>
+                    <% if (left.icon !== '') { %>
+                        <img src="<%= left.icon %>" />
+                    <% } else { %>
+                        <span><%= left.title %></span>
+                    <% } %>
+                    <% if (left.route !== '') { %>
+                        </a>
+                    <% } %>
+                </div>
+            <% } %>
+            <% if (middle.visible === true) { %>
+                <div class="col-xs-<%= 12/(~~left.visible + ~~middle.visible + ~~right.visible) %> my-bottomMenuLink">
+                    <% if (middle.route !== '') { %>
+                        <a href="#<%= middle.route %>">
+                    <% } %>
+                    <% if (middle.icon !== '') { %>
+                        <img src="<%= middle.icon %>" />
+                    <% } else { %>
+                        <span><%= middle.title %></span>
+                    <% } %>
+                    <% if (middle.route !== '') { %>
+                        </a>
+                    <% } %>
+                </div>
+            <% } %>
+            <% if (right.visible === true) { %>
+                <div class="col-xs-<%= 12/(~~left.visible + ~~middle.visible + ~~right.visible) %> my-bottomMenuLink">
+                    <% if (right.route !== '') { %>
+                        <a href="#<%= right.route %>">
+                    <% } %>
+                    <% if (right.icon !== '') { %>
+                        <img src="<%= right.icon %>" />
+                    <% } else { %>
+                        <span><%= right.title %></span>
+                    <% } %>
+                    <% if (right.route !== '') { %>
+                        </a>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+<% } %>

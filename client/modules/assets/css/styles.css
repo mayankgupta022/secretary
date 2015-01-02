@@ -1,0 +1,39 @@
+body {
+    font-family: source-sans-pro, sans-serif;
+    font-size: 15px;
+    /*padding-top: 60px;*/
+    /*padding-bottom: 40px;*/
+}
+
+#content {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.dropdown-menu {
+    max-height: 400px;
+    overflow: auto;
+    width: 230px;
+}
+
+.list-item {
+    padding-top: 6px;
+    padding-left: 56px;
+}
+
+.no-reports {
+    display: none;
+}
+
+.navbar-default {
+    background-color: #116690;
+}
+
+.my-bottomMenuLink, .my-topMenuLink {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #eeeeee;
+    font-weight: bold;
+    font-size: 20px;
+    border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+}

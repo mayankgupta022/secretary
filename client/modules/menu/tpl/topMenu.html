@@ -1,0 +1,51 @@
+<% if (visible === true) { %>
+    <div class="navbar navbar-fixed-top navbar-default text-center topMenuModule">
+        <div class="row">
+            <div class="col-xs-2  my-topMenuLink">
+                <% if (left.visible === true) { %>
+                    <% if (left.route !== '') { %>
+                        <a href="#<%= left.route %>">
+                    <% } %>
+                    <% if (left.icon !== '') { %>
+                        <img src="<%= left.icon %>" />
+                    <% } else { %>
+                        <span><%= left.title %></span>
+                    <% } %>
+                    <% if (left.route !== '') { %>
+                        </a>
+                    <% } %>
+                <% } %>
+            </div>
+            <div class="col-xs-8  my-topMenuLink">
+                <% if (middle.visible === true) { %>
+                    <% if (middle.route !== '') { %>
+                        <a href="#<%= middle.route %>">
+                    <% } %>
+                    <% if (middle.icon !== '') { %>
+                        <img src="<%= middle.icon %>" />
+                    <% } else { %>
+                        <span><%= middle.title %></span>
+                    <% } %>
+                    <% if (middle.route !== '') { %>
+                        </a>
+                    <% } %>
+                <% } %>
+            </div>
+            <div class="col-xs-2  my-topMenuLink">
+                <% if (right.visible === true) { %>
+                    <% if (right.route !== '') { %>
+                        <a href="#<%= right.route %>">
+                    <% } %>
+                    <% if (right.icon !== '') { %>
+                        <img src="<%= right.icon %>" />
+                    <% } else { %>
+                        <span><%= right.title %></span>
+                    <% } %>
+                    <% if (right.route !== '') { %>
+                        </a>
+                    <% } %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+<% } %>

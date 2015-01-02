@@ -30,21 +30,21 @@ define(function (require) {
             },
             "bottom" : {
                 "visible" : true,
-                "left" : {
+                "first" : {
                     "visible" : true,
                     "title" : "bottomLeft",
                     "icon" : "",
                     "route" : "",
                     "active" : false
                 },
-                "middle" : {
+                "second" : {
                     "visible" : true,
                     "title" : "bottomMiddle",
                     "icon" : "",
                     "route" : "",
                     "active" : false
                 },
-                "right" : {
+                "third" : {
                     "visible" : true,
                     "title" : "bottomRight",
                     "icon" : "",

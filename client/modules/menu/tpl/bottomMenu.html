@@ -1,47 +1,47 @@
 <% if (visible === true) { %>
     <div class="navbar navbar-fixed-bottom navbar-default text-center bottomMenuModule">
         <div class="row">
-            <% if (left.visible === true) { %>
-                <div class="col-xs-<%= 12/(~~left.visible + ~~middle.visible + ~~right.visible) %> my-bottomMenuLink">
-                    <% if (left.route !== '') { %>
-                        <a href="#<%= left.route %>">
+            <% if (first.visible === true) { %>
+                <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> my-bottomMenuLink <% if (first.active === true) { %>active<% } %>">
+                    <% if (first.route !== '') { %>
+                        <a href="#<%= first.route %>">
                     <% } %>
-                    <% if (left.icon !== '') { %>
-                        <img src="<%= left.icon %>" />
+                    <% if (first.icon !== '') { %>
+                        <img src="<%= first.icon %>" />
                     <% } else { %>
-                        <span><%= left.title %></span>
+                        <span><%= first.title %></span>
                     <% } %>
-                    <% if (left.route !== '') { %>
+                    <% if (first.route !== '') { %>
                         </a>
                     <% } %>
                 </div>
             <% } %>
-            <% if (middle.visible === true) { %>
-                <div class="col-xs-<%= 12/(~~left.visible + ~~middle.visible + ~~right.visible) %> my-bottomMenuLink">
-                    <% if (middle.route !== '') { %>
-                        <a href="#<%= middle.route %>">
+            <% if (second.visible === true) { %>
+                <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> my-bottomMenuLink <% if (second.active === true) { %>active<% } %>">
+                    <% if (second.route !== '') { %>
+                        <a href="#<%= second.route %>">
                     <% } %>
-                    <% if (middle.icon !== '') { %>
-                        <img src="<%= middle.icon %>" />
+                    <% if (second.icon !== '') { %>
+                        <img src="<%= second.icon %>" />
                     <% } else { %>
-                        <span><%= middle.title %></span>
+                        <span><%= second.title %></span>
                     <% } %>
-                    <% if (middle.route !== '') { %>
+                    <% if (second.route !== '') { %>
                         </a>
                     <% } %>
                 </div>
             <% } %>
-            <% if (right.visible === true) { %>
-                <div class="col-xs-<%= 12/(~~left.visible + ~~middle.visible + ~~right.visible) %> my-bottomMenuLink">
-                    <% if (right.route !== '') { %>
-                        <a href="#<%= right.route %>">
+            <% if (third.visible === true) { %>
+                <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> my-bottomMenuLink <% if (third.active === true) { %>active<% } %>">
+                    <% if (third.route !== '') { %>
+                        <a href="#<%= third.route %>">
                     <% } %>
-                    <% if (right.icon !== '') { %>
-                        <img src="<%= right.icon %>" />
+                    <% if (third.icon !== '') { %>
+                        <img src="<%= third.icon %>" />
                     <% } else { %>
-                        <span><%= right.title %></span>
+                        <span><%= third.title %></span>
                     <% } %>
-                    <% if (right.route !== '') { %>
+                    <% if (third.route !== '') { %>
                         </a>
                     <% } %>
                 </div>

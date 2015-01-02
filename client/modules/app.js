@@ -23,5 +23,6 @@ require.config({
 
 require(['jquery', 'backbone', 'underscore', 'router'], function ($, Backbone, _, Router) {
     var router = new Router();
+    document.router = router;
     Backbone.history.start();
 });

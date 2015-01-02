@@ -5,13 +5,13 @@ define(function (require) {
     var Backbone  = require('backbone'),
         server_ip = 'localhost';
 
-    document.serverURL = 'http://' . server_ip;
-    document.mediaURL = 'http://' . server_ip;
+    document.serverURL = 'http://' + server_ip + '/';
+    document.mediaURL = 'http://' + server_ip + '/';
 
      var originalSync = Backbone.sync;
 
     Backbone.sync = function (method, model, options) {
-        if (method === "read") {
+        if (method === "read" || method === "create"|| method === "update" || method === "delete") {
             options.dataType = "jsonp";
             return originalSync.apply(Backbone, arguments);
         }

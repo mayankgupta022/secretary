@@ -28,12 +28,16 @@ body {
     background-color: #116690;
 }
 
-.my-bottomMenuLink, .my-topMenuLink {
+.my-bottomMenuLink, .my-topMenuLink{
     padding-top: 10px;
     padding-bottom: 10px;
-    color: #eeeeee;
-    font-weight: bold;
-    font-size: 20px;
     border-left: 1px solid #CCCCCC;
     border-right: 1px solid #CCCCCC;
 }
+
+.my-bottomMenuLink span, .my-topMenuLink span {
+    color: #eeeeee;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+ }

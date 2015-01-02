@@ -35,27 +35,32 @@ define(function (require) {
                     "title" : "bottomLeft",
                     "icon" : "",
                     "route" : "",
-                    "active" : true
+                    "active" : false
                 },
                 "second" : {
                     "visible" : true,
-                    "title" : "Login",
+                    "title" : "bottomMiddle",
                     "icon" : "",
-                    "route" : "login",
+                    "route" : "",
                     "active" : false
                 },
                 "third" : {
-                    "visible" : false,
+                    "visible" : true,
                     "title" : "bottomRight",
                     "icon" : "",
                     "route" : "",
                     "active" : true
                 }
             }
-        };
+        },
+
+        Login = Backbone.Model.extend({
+            urlRoot : document.serverURL + 'user'
+            });
 
     return {
-        MenuData: menuData
+        MenuData: menuData,
+        Login: Login
     };
 
 

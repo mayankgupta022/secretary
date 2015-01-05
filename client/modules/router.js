@@ -17,6 +17,7 @@ define(function (require) {
             "": "home",
             "blank": "blank",
             "login": "login",
+            "signUp": "signUp",
             "try/:id": "try"
         },
 
@@ -46,6 +47,15 @@ define(function (require) {
                 var loginView = new LoginView();
                 self.updateCurrentView(loginView);
                 $(loginView.render(menuView).el).appendTo($content);
+            });
+        },
+
+        signUp: function () {
+            var self = this;
+            require(["signUp/views/signUp"], function (SignUpView) {
+                var signUpView = new SignUpView();
+                self.updateCurrentView(signUpView);
+                $(signUpView.render(menuView).el).appendTo($content);
             });
         },
 

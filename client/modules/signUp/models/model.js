@@ -35,14 +35,14 @@ define(function (require) {
                     "title" : "Login",
                     "icon" : "",
                     "route" : "login",
-                    "active" : true
+                    "active" : false
                 },
                 "second" : {
                     "visible" : true,
                     "title" : "SignUp",
                     "icon" : "",
                     "route" : "signUp",
-                    "active" : false
+                    "active" : true
                 },
                 "third" : {
                     "visible" : false,
@@ -54,13 +54,13 @@ define(function (require) {
             }
         },
 
-        Login = Backbone.Model.extend({
+        SignUp = Backbone.Model.extend({
             urlRoot : document.serverURL + 'user'
             });
 
     return {
         MenuData: menuData,
-        Login: Login
+        SignUp: SignUp
     };
 
 

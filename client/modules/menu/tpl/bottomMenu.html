@@ -1,8 +1,8 @@
 <% if (visible === true) { %>
     <div class="navbar navbar-fixed-bottom navbar-default text-center bottomMenuModule">
-        <div class="row">
+        <div class="row my-menu">
             <% if (first.visible === true) { %>
-                <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> my-bottomMenuLink <% if (first.active === true) { %>active<% } %>">
+                <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> <% if (first.active === true) { %>active<% } %>">
                     <% if (first.route !== '') { %>
                         <a href="#<%= first.route %>">
                     <% } %>
@@ -17,7 +17,7 @@
                 </div>
             <% } %>
             <% if (second.visible === true) { %>
-                <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> my-bottomMenuLink <% if (second.active === true) { %>active<% } %>">
+                <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> <% if (second.active === true) { %>active<% } %>">
                     <% if (second.route !== '') { %>
                         <a href="#<%= second.route %>">
                     <% } %>
@@ -32,7 +32,7 @@
                 </div>
             <% } %>
             <% if (third.visible === true) { %>
-                <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> my-bottomMenuLink <% if (third.active === true) { %>active<% } %>">
+                <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> <% if (third.active === true) { %>active<% } %>">
                     <% if (third.route !== '') { %>
                         <a href="#<%= third.route %>">
                     <% } %>

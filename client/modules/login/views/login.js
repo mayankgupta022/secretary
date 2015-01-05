@@ -17,8 +17,14 @@ define(function (require) {
 
         onkeydown: function(e) {
             var code = e.keyCode || e.which;
-            if(code == 65) 
-                this.login();
+            var username = $('#username').val(),
+                password = $('#password').val();
+            if (username != '')
+                $('#username').removeClass('error').addClass('success');
+            if (password != '')
+                $('#password').removeClass('error').addClass('success');
+            // if(code === 13) 
+                // this.login();
         },
 
         login: function() {
@@ -26,9 +32,15 @@ define(function (require) {
             var username = $('#username').val(),
                 password = $('#password').val();
             if (username == '')
+            {
                 $('#loginMsg').html('Please enter your username');
+                $('#username').removeClass('success').addClass('error').focus();
+            }
             else if (password == '')
+            {
                 $('#loginMsg').html('Please enter your password');
+                $('#password').removeClass('success').addClass('error').focus();
+            }
             else {
                 var login = new model.Login();
                 login.save({//login.fetch({ data: $.param({ username: username}) });
@@ -36,8 +48,10 @@ define(function (require) {
                     password: password
                     }, {
                         success: function (data) {
-                            if (data.status === 1)
+                            if (data.status === 1 && data.msg === 'invalid')
                                 $('#loginMsg').html('Username and password do not match!');
+                            if (data.status === 1 && data.msg === 'deactivated')
+                                $('#loginMsg').html('Your account has been deactivated!');
                             else
                                 document.router.navigate("blank", {trigger: true});
                         },

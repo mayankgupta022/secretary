@@ -1,8 +1,17 @@
+/************/
+/*COMMON*/
+/************/
+
 body {
     font-family: source-sans-pro, sans-serif;
     font-size: 15px;
+    background-color: #fefefe;
     /*padding-top: 60px;*/
     /*padding-bottom: 40px;*/
+}
+
+.error {
+    border: 1px solid #FF0000;
 }
 
 #content {
@@ -20,24 +29,45 @@ body {
     padding-left: 56px;
 }
 
-.no-reports {
-    display: none;
+.my-div-inline {
+    display: inline-block;
 }
+
+.my-no-padding {
+    padding: 0px;
+}
+
+/************/
+/*MENU*/
+/************/
 
 .navbar-default {
-    background-color: #116690;
+    background-color: #303030;
+    box-shadow: 0px 0px 2px 2px #D0D0D0;
 }
 
-.my-bottomMenuLink, .my-topMenuLink{
-    padding-top: 10px;
-    padding-bottom: 10px;
+.my-menu div{
+    padding-top: 12px;
+    padding-bottom: 12px;
     border-left: 1px solid #CCCCCC;
     border-right: 1px solid #CCCCCC;
 }
 
-.my-bottomMenuLink span, .my-topMenuLink span {
+.my-menu span {
     color: #eeeeee;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
+    text-decoration: none;
+ }
+
+.my-menu .active {
+    background-color: #FFBB30;
+}
+
+.my-menu .active span {
+    color: #303030;
+}
+
+ .my-menu a:hover {
     text-decoration: none;
  }

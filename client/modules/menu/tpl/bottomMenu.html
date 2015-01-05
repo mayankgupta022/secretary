@@ -2,50 +2,50 @@
     <div class="navbar navbar-fixed-bottom navbar-default text-center bottomMenuModule">
         <div class="row my-menu">
             <% if (first.visible === true) { %>
-                <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> <% if (first.active === true) { %>active<% } %>">
-                    <% if (first.route !== '') { %>
-                        <a href="#<%= first.route %>">
-                    <% } %>
-                    <% if (first.icon !== '') { %>
-                        <img src="<%= first.icon %>" />
-                    <% } else { %>
-                        <span><%= first.title %></span>
-                    <% } %>
-                    <% if (first.route !== '') { %>
-                        </a>
-                    <% } %>
-                </div>
+                <% if (first.route !== '') { %>
+                    <a href="#<%= first.route %>">
+                <% } %>
+                    <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> <% if (first.active === true) { %>active<% } %>">
+                        <% if (first.icon !== '') { %>
+                            <img src="<%= first.icon %>" />
+                        <% } else { %>
+                            <span><%= first.title %></span>
+                        <% } %>
+                    </div>
+                <% if (first.route !== '') { %>
+                    </a>
+                <% } %>
             <% } %>
             <% if (second.visible === true) { %>
-                <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> <% if (second.active === true) { %>active<% } %>">
-                    <% if (second.route !== '') { %>
-                        <a href="#<%= second.route %>">
-                    <% } %>
-                    <% if (second.icon !== '') { %>
-                        <img src="<%= second.icon %>" />
-                    <% } else { %>
-                        <span><%= second.title %></span>
-                    <% } %>
-                    <% if (second.route !== '') { %>
-                        </a>
-                    <% } %>
-                </div>
+                <% if (second.route !== '') { %>
+                    <a href="#<%= second.route %>">
+                <% } %>
+                    <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> <% if (second.active === true) { %>active<% } %>">
+                        <% if (second.icon !== '') { %>
+                            <img src="<%= second.icon %>" />
+                        <% } else { %>
+                            <span><%= second.title %></span>
+                        <% } %>
+                    </div>
+                <% if (second.route !== '') { %>
+                    </a>
+                <% } %>
             <% } %>
             <% if (third.visible === true) { %>
-                <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> <% if (third.active === true) { %>active<% } %>">
-                    <% if (third.route !== '') { %>
-                        <a href="#<%= third.route %>">
-                    <% } %>
-                    <% if (third.icon !== '') { %>
-                        <img src="<%= third.icon %>" />
-                    <% } else { %>
-                        <span><%= third.title %></span>
-                    <% } %>
-                    <% if (third.route !== '') { %>
-                        </a>
-                    <% } %>
-                </div>
-            <% } %>
+            <% if (third.route !== '') { %>
+                    <a href="#<%= third.route %>">
+                <% } %>
+                    <div class="col-xs-<%= 12/(~~first.visible + ~~second.visible + ~~third.visible) %> <% if (third.active === true) { %>active<% } %>">
+                        <% if (third.icon !== '') { %>
+                            <img src="<%= third.icon %>" />
+                        <% } else { %>
+                            <span><%= third.title %></span>
+                        <% } %>
+                    </div>
+                <% if (third.route !== '') { %>
+                    </a>
+                <% } %>
+                <% } %>
         </div>
     </div>
 <% } %>

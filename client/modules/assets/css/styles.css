@@ -6,8 +6,8 @@ body {
     font-family: source-sans-pro, sans-serif;
     font-size: 15px;
     background-color: #fefefe;
-    /*padding-top: 60px;*/
-    /*padding-bottom: 40px;*/
+    padding-top: 60px;
+    padding-bottom: 40px;
 }
 
 .error {
@@ -27,6 +27,10 @@ body {
 .list-item {
     padding-top: 6px;
     padding-left: 56px;
+}
+
+.no-reports {
+    display: none;
 }
 
 .my-div-inline {

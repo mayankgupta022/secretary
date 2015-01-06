@@ -19,7 +19,7 @@ def home(request, i = 10):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -44,7 +44,7 @@ def delNotebook(request,  i = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -66,7 +66,7 @@ def delPage(request, i = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -86,7 +86,7 @@ def delStack(request,  i = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -107,7 +107,7 @@ def makeDefaultNotebook(request, i = 0):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -137,7 +137,7 @@ def newNotebook(request):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -166,7 +166,7 @@ def newPage(request):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -187,7 +187,7 @@ def newStack(request):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -222,7 +222,7 @@ def notebook(request, i = 0):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -237,7 +237,7 @@ def notebooks(request):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -271,7 +271,7 @@ def page(request, i = 0):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -303,7 +303,7 @@ def stack(request, i = 0):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -318,7 +318,7 @@ def stacks(request):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -336,7 +336,7 @@ def restorePage(request, i = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -351,4 +351,4 @@ def trash(request):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")

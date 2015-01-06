@@ -20,7 +20,7 @@ def home(request, i = 10):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -48,7 +48,7 @@ def day(request, i = 0):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -68,7 +68,7 @@ def delCalender(request,  i = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -90,7 +90,7 @@ def delEvent(request, i = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -106,7 +106,7 @@ def delDay(request, i = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -127,7 +127,7 @@ def makeDefaultCalender(request, i = 0):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -157,7 +157,7 @@ def newCalender(request):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -188,7 +188,7 @@ def newEvent(request):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -215,7 +215,7 @@ def newDay(request):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -251,7 +251,7 @@ def calender(request, i = 0):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -266,7 +266,7 @@ def calenders(request):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -308,7 +308,7 @@ def event(request, i = 0):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -326,7 +326,7 @@ def restoreEvent(request, i = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -341,4 +341,4 @@ def trash(request):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")

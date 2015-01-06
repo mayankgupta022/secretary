@@ -26,7 +26,7 @@ def userLogin(request):
 	else:
 		info["status"] = 1
 		info["msg"] = "invalid"
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @csrf_exempt
@@ -35,7 +35,7 @@ def userLogout(request):
 	logout(request)
 	info["status"] = 0
 	info["msg"] = "logout"
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @csrf_exempt
@@ -58,7 +58,7 @@ def userSignUp(request):
 		user.save()
 		info["status"] = 0
 		info["msg"] = "signUp"
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @csrf_exempt
@@ -88,7 +88,7 @@ def userChangePass(request):
 		else:
 			info["status"] = 1
 			info["msg"] = "invalid"
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @csrf_exempt
@@ -100,14 +100,16 @@ def userGetInfo(request):
 		info["first_name"] = "Anon"
 		info["last_name"] = ""
 		info["email"] = ""
+		info["role"] = 0
 	else:
 		info["status"] = 1
 		info["username"] = request.user.username
 		info["first_name"] = request.user.first_name
 		info["last_name"] = request.user.last_name
 		info["email"] = request.user.email
+		info["role"] = 1
 	info["msg"] = "getInfo"
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @csrf_exempt
@@ -121,4 +123,4 @@ def userSetInfo(request):
 	request.user.save()
 	info["status"] = 0
 	info["msg"] = "setInfo"
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")

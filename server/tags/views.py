@@ -27,7 +27,7 @@ def allTags(request, model = ''):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -49,7 +49,7 @@ def newTag(request, model = ''):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -66,7 +66,7 @@ def delTag(request, model = '', i = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -82,7 +82,7 @@ def entities(request, model = '', i = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -98,7 +98,7 @@ def tags(request, model = '', i = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -122,4 +122,4 @@ def tag(request, model = '', i = -1, j = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")

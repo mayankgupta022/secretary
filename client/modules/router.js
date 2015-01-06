@@ -22,6 +22,9 @@ define(function (require) {
         },
 
         initialize: function () {
+
+            this.listenTo(this, "route", this.getInfo);
+
             shellView = new ShellView();
             $body.html(shellView.render().el);
             $content = $("#content");
@@ -59,8 +62,28 @@ define(function (require) {
             });
         },
 
+
         try: function (id) {
             console.log(id);
+        },
+
+        getInfo: function() {
+            var getInfo = new model.GetInfo();
+            getInfo.fetch({
+                        success: function (data) {
+                            document.user = data.user;
+                            document.firstName = data.firstName;
+                            document.lastName = data.lastName;
+                            document.email = data.email;
+                            document.role = data.role;
+                        },
+                        error: function (data) {
+                            document.user = 'anon';
+                            document.firstName = 'Anon';
+                            document.lastName = '';
+                            document.role = 0;
+                        }
+                });
         },
 
         updateCurrentView: function(newView) {

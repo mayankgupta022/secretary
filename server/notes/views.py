@@ -19,7 +19,7 @@ def home(request, i = 10):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -41,7 +41,7 @@ def delNote(request, i = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -65,7 +65,7 @@ def newNote(request):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -97,7 +97,7 @@ def note(request, i = 0):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -115,7 +115,7 @@ def restoreNote(request, i = -1):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
 @login_required
@@ -130,4 +130,4 @@ def trash(request):
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
 
-	return HttpResponse(json.dumps(info))
+	return HttpResponse(json.dumps(info), content_type="application/json")

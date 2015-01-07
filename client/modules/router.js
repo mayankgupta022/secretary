@@ -18,6 +18,7 @@ define(function (require) {
             "blank": "blank",
             "changePass": "changePass",
             "login": "login",
+            "logout": "logout",
             "signUp": "signUp",
             "try/:id": "try"
         },
@@ -60,6 +61,15 @@ define(function (require) {
                 var loginView = new LoginView();
                 self.updateCurrentView(loginView);
                 $(loginView.render(menuView).el).appendTo($content);
+            });
+        },
+
+        logout: function () {
+            var self = this;
+            require(["logout/views/logout"], function (LogoutView) {
+                var logoutView = new LogoutView();
+                self.updateCurrentView(logoutView);
+                $(logoutView.render().el).appendTo($content);
             });
         },
 

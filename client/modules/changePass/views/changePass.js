@@ -59,7 +59,7 @@ define(function (require) {
             }
             else {
                 var changePass = new model.ChangePass();
-                changePass.save({//changePass.fetch({ data: $.param({ oldPassword: oldPassword}) });
+                changePass.save({
                     oldPassword: oldPassword,
                     newPassword: newPassword
                     }, {

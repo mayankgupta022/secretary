@@ -20,6 +20,7 @@ define(function (require) {
             "login": "login",
             "logout": "logout",
             "signUp": "signUp",
+            "updateInfo": "updateInfo",
             "try/:id": "try"
         },
 
@@ -82,6 +83,14 @@ define(function (require) {
             });
         },
 
+        updateInfo: function () {
+            var self = this;
+            require(["updateInfo/views/updateInfo"], function (UpdateInfoView) {
+                var updateInfoView = new UpdateInfoView();
+                self.updateCurrentView(updateInfoView);
+                $(updateInfoView.render(menuView).el).appendTo($content);
+            });
+        },
 
         try: function (id) {
             console.log(id);
@@ -91,11 +100,11 @@ define(function (require) {
             var getInfo = new model.GetInfo();
             getInfo.fetch({
                         success: function (data) {
-                            document.user = data.user;
-                            document.firstName = data.firstName;
-                            document.lastName = data.lastName;
-                            document.email = data.email;
-                            document.role = data.role;
+                            document.user = data.attributes.user;
+                            document.firstName = data.attributes.firstName;
+                            document.lastName = data.attributes.lastName;
+                            document.email = data.attributes.email;
+                            document.role = data.attributes.role;
                         },
                         error: function (data) {
                             document.user = 'anon';

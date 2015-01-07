@@ -43,7 +43,7 @@ define(function (require) {
             }
             else {
                 var login = new model.Login();
-                login.save({//login.fetch({ data: $.param({ username: username}) });
+                login.save({
                     username: username,
                     password: password
                     }, {

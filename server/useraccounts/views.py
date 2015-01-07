@@ -94,15 +94,15 @@ def userGetInfo(request):
 	if request.user.is_anonymous():
 		info["status"] = 0
 		info["username"] = "anon"
-		info["first_name"] = "Anon"
-		info["last_name"] = ""
+		info["firstName"] = "Anon"
+		info["lastName"] = ""
 		info["email"] = ""
 		info["role"] = 0
 	else:
 		info["status"] = 1
 		info["username"] = request.user.username
-		info["first_name"] = request.user.first_name
-		info["last_name"] = request.user.last_name
+		info["firstName"] = request.user.first_name
+		info["lastName"] = request.user.last_name
 		info["email"] = request.user.email
 		info["role"] = 1
 	info["msg"] = "getInfo"
@@ -115,8 +115,8 @@ def userSetInfo(request):
 	info = dict()
 
 	data = json.loads(request.body)
-	request.user.first_name = data.get('first_name', request.user.first_name)
-	request.user.last_name = data.get('last_name', request.user.last_name)
+	request.user.first_name = data.get('firstName', request.user.first_name)
+	request.user.last_name = data.get('lastName', request.user.last_name)
 	
 	request.user.save()
 	info["status"] = 0

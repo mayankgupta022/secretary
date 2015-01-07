@@ -16,6 +16,7 @@ define(function (require) {
         routes: {
             "": "home",
             "blank": "blank",
+            "changePass": "changePass",
             "login": "login",
             "signUp": "signUp",
             "try/:id": "try"
@@ -41,6 +42,15 @@ define(function (require) {
                 var homeView = new HomeView();
                 self.updateCurrentView(homeView);
                 $(homeView.render(menuView).el).appendTo($content);
+            });
+        },
+
+        changePass: function () {
+            var self = this;
+            require(["changePass/views/changePass"], function (ChangePassView) {
+                var changePassView = new ChangePassView();
+                self.updateCurrentView(changePassView);
+                $(changePassView.render(menuView).el).appendTo($content);
             });
         },
 

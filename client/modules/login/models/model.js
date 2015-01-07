@@ -55,7 +55,7 @@ define(function (require) {
         },
 
         Login = Backbone.Model.extend({
-            urlRoot : document.serverURL + 'user'
+            urlRoot : document.serverURL + 'user/login/'
             });
 
     return {

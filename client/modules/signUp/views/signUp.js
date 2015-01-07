@@ -72,9 +72,14 @@ define(function (require) {
                 $('#signUpMsg').html('Please enter your password');
                 $('#password').removeClass('success').addClass('error').focus();
             }
+            else if (confirmPassword == '')
+            {
+                $('#signUpMsg').html('Please confirm your password');
+                $('#confirmPassword').removeClass('success').addClass('error').focus();
+            }
             else if (confirmPassword != password)
             {
-                $('#signUpMsg').html('Passwords do not match. Please confirm your password');
+                $('#signUpMsg').html('New and Confirm passwords do not match. Please confirm your password');
                 $('#confirmPassword').removeClass('success').addClass('error').focus();
             }
             else {

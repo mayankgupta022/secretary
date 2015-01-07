@@ -11,8 +11,9 @@ import json
 def userLogin(request):
 	info = dict()
 
-	username = request.POST['username']
-	password = request.POST['password']
+	data = json.loads(request.body)
+	username = data['username']
+	password = data['password']
 	
 	user = authenticate(username=username, password=password)
 	if user is not None:
@@ -42,11 +43,12 @@ def userLogout(request):
 def userSignUp(request):
 	info = dict()
 	
-	username = request.POST['username']
-	first_name = request.POST['first_name']
-	last_name = request.POST.get('last_name', '')
-	email = request.POST['email']
-	password = request.POST['password']
+	data = json.loads(request.body)
+	username = data['username']
+	first_name = data['first_name']
+	last_name = data.get('last_name', '')
+	email = data['email']
+	password = data['password']
 
 	if User.objects.filter(username = username):
 		info["status"] = 1
@@ -67,27 +69,22 @@ def userChangePass(request):
 	info = dict()
 	username = request.user.username
 	
-	oldPass = request.POST['oldPass']
-	newPass = request.POST['newPass']
-	confirmPass = request.POST['confirmPass']
-	
-	if newPass != confirmPass:
-		info["status"] = 1
-		info["msg"] = "mismatch"
-	else:
-		user = authenticate(username=username, password=oldPass)
-		if user is not None:
-			if user.is_active:
-				user.set_password(newPass)
-				user.save()
-				info["status"] = 0
-				info["msg"] = "changePass"
-			else:
-				info["status"] = 1
-				info["msg"] = "deactivated"
+	data = json.loads(request.body)
+	oldPass = data['oldPassword']
+	newPass = data['newPassword']
+	user = authenticate(username=username, password=oldPass)
+	if user is not None:
+		if user.is_active:
+			user.set_password(newPass)
+			user.save()
+			info["status"] = 0
+			info["msg"] = "changePass"
 		else:
 			info["status"] = 1
-			info["msg"] = "invalid"
+			info["msg"] = "deactivated"
+	else:
+		info["status"] = 1
+		info["msg"] = "invalid"
 	return HttpResponse(json.dumps(info), content_type="application/json")
 
 
@@ -117,8 +114,9 @@ def userGetInfo(request):
 def userSetInfo(request):
 	info = dict()
 
-	request.user.first_name = request.POST.get('first_name', request.user.first_name)
-	request.user.last_name = request.POST.get('last_name', request.user.last_name)
+	data = json.loads(request.body)
+	request.user.first_name = data.get('first_name', request.user.first_name)
+	request.user.last_name = data.get('last_name', request.user.last_name)
 	
 	request.user.save()
 	info["status"] = 0

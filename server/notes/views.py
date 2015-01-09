@@ -126,8 +126,7 @@ def trash(request):
 
 	try:
 		notes = Note.objects.filter(owner = request.user.username, active = 1).order_by('-updated')
-		info["status"] = 0
-		info["notes"] = collection_to_json(notes)
+		info = collection_to_json(notes)
 	except Exception as e:
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))

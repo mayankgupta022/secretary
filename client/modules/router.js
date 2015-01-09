@@ -17,15 +17,17 @@ define(function (require) {
             "": "home",
             "blank": "blank",
             "changePass": "changePass",
-            "delNote/:id": "delNote",
             "login": "login",
             "logout": "logout",
-            "newNote": "newNote",
-            "notes": "notes",
-            "restoreNote/:id": "restoreNote",
             "signUp": "signUp",
             "updateInfo": "updateInfo",
-            "try/:id": "try"
+            "try/:id": "try",
+
+            "notes": "notes",
+            "notes/delNote/:id": "delNote",
+            "notes/newNote": "newNote",
+            "notes/restoreNote/:id": "restoreNote",
+            "notes/trash": "notesTrash"
         },
 
         initialize: function () {
@@ -120,6 +122,15 @@ define(function (require) {
                 var signUpView = new SignUpView();
                 self.updateCurrentView(signUpView);
                 $(signUpView.render(menuView).el).appendTo($content);
+            });
+        },
+
+        notesTrash: function () {
+            var self = this;
+            require(["notesTrash/views/trash"], function (NotesTrashView) {
+                var notesTrashView = new NotesTrashView();
+                self.updateCurrentView(notesTrashView);
+                $(notesTrashView.render(menuView).el).appendTo($content);
             });
         },
 

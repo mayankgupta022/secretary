@@ -10,6 +10,7 @@ define(function (require) {
     return Backbone.View.extend({
 
         render: function () {
+            console.log(this.model.attributes.active);
             this.$el.html(template(this.model.attributes));
             return this;
         }

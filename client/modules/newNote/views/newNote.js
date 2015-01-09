@@ -15,7 +15,7 @@ define(function (require) {
                             console.log(data.msg);
                         else
                             console.log(data.attributes);
-                            document.router.navigate("note/" + data.attributes.newNote, {trigger: true,  replace: true});
+                            document.router.navigate("notes/note/" + data.attributes.newNote, {trigger: true,  replace: true});
                     },
                     error: function (data) {
                         console.log(data);

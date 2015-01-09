@@ -3,14 +3,14 @@ define(function (require) {
     "use strict";
 
     var Backbone = require('backbone'),
-        model    = require('delNote/models/model');
+        model    = require('notesRestore/models/model');
 
     return Backbone.View.extend({
 
         render: function (id) {
-            var delNote = new model.DelNote();
-            delNote.urlRoot = delNote.urlRoot + id + "/";
-            delNote.save({}, {
+            var restoreNote = new model.RestoreNote();
+            restoreNote.urlRoot = restoreNote.urlRoot + id + "/";
+            restoreNote.save({}, {
                     success: function (data) {
                         if (data.status === 1)
                             console.log(data.msg);

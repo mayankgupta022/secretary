@@ -64,7 +64,7 @@ define(function (require) {
 
         delNote: function (id) {
             var self = this;
-            require(["delNote/views/delNote"], function (DelNoteView) {
+            require(["notesDel/views/delNote"], function (DelNoteView) {
                 var delNoteView = new DelNoteView();
                 self.updateCurrentView(delNoteView);
                 $(delNoteView.render(id).el).appendTo($content);
@@ -91,7 +91,7 @@ define(function (require) {
 
         newNote: function () {
             var self = this;
-            require(["newNote/views/newNote"], function (NewNoteView) {
+            require(["notesNew/views/newNote"], function (NewNoteView) {
                 var newNoteView = new NewNoteView();
                 self.updateCurrentView(newNoteView);
                 $(newNoteView.render().el).appendTo($content);
@@ -109,7 +109,7 @@ define(function (require) {
 
         restoreNote: function (id) {
             var self = this;
-            require(["restoreNote/views/restoreNote"], function (RestoreNoteView) {
+            require(["notesRestore/views/restoreNote"], function (RestoreNoteView) {
                 var restoreNoteView = new RestoreNoteView();
                 self.updateCurrentView(restoreNoteView);
                 $(restoreNoteView.render(id).el).appendTo($content);

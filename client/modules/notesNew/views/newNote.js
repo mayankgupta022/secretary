@@ -3,7 +3,7 @@ define(function (require) {
     "use strict";
 
     var Backbone = require('backbone'),
-        model    = require('newNote/models/model');
+        model    = require('notesNew/models/model');
 
     return Backbone.View.extend({
 

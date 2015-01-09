@@ -22,6 +22,7 @@ define(function (require) {
             "logout": "logout",
             "newNote": "newNote",
             "notes": "notes",
+            "restoreNote/:id": "restoreNote",
             "signUp": "signUp",
             "updateInfo": "updateInfo",
             "try/:id": "try"
@@ -101,6 +102,15 @@ define(function (require) {
                 var notesView = new NotesView();
                 self.updateCurrentView(notesView);
                 $(notesView.render(menuView).el).appendTo($content);
+            });
+        },
+
+        restoreNote: function (id) {
+            var self = this;
+            require(["restoreNote/views/restoreNote"], function (RestoreNoteView) {
+                var restoreNoteView = new RestoreNoteView();
+                self.updateCurrentView(restoreNoteView);
+                $(restoreNoteView.render(id).el).appendTo($content);
             });
         },
 

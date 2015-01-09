@@ -64,9 +64,9 @@ define(function (require) {
                     newPassword: newPassword
                     }, {
                         success: function (data) {
-                            if (data.status === 1 && data.msg === 'invalid')
+                            if (data.attributes.status === 1 && data.attributes.msg === 'invalid')
                                 $('#changePassMsg').html('You old password is incorrect!');
-                            if (data.status === 1 && data.msg === 'deactivated')
+                            if (data.attributes.status === 1 && data.attributes.msg === 'deactivated')
                                 $('#changePassMsg').html('Your account has been deactivated!');
                             else
                                 document.router.navigate("blank", {trigger: true});

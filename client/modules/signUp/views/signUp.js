@@ -92,7 +92,7 @@ define(function (require) {
                     password: password
                     }, {
                         success: function (data) {
-                            if (data.status === 1 && data.msg === 'alreadyExists')
+                            if (data.attributes.status === 1 && data.attributes.msg === 'alreadyExists')
                                 $('#signUpMsg').html('Username not available! Please try another');
                             else
                                 document.router.navigate("blank", {trigger: true});

@@ -19,6 +19,7 @@ define(function (require) {
             "changePass": "changePass",
             "login": "login",
             "logout": "logout",
+            "newNote": "newNote",
             "notes": "notes",
             "signUp": "signUp",
             "updateInfo": "updateInfo",
@@ -72,6 +73,15 @@ define(function (require) {
                 var logoutView = new LogoutView();
                 self.updateCurrentView(logoutView);
                 $(logoutView.render().el).appendTo($content);
+            });
+        },
+
+        newNote: function () {
+            var self = this;
+            require(["newNote/views/newNote"], function (NewNoteView) {
+                var newNoteView = new NewNoteView();
+                self.updateCurrentView(newNoteView);
+                $(newNoteView.render().el).appendTo($content);
             });
         },
 

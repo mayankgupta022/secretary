@@ -48,16 +48,17 @@ def delNote(request, i = -1):
 def newNote(request):
 	info = dict()
 
+	data = json.loads(request.body)
 	try:
 		note = Note.objects.create(
 					owner = request.user.username,
-					name = request.POST.get('name', 'Note ' + str(Note.objects.filter(owner = request.user.username).count() + 1)),
-					context = request.POST.get('context', 0),
-					active = request.POST.get('active', 0),
-					priority = request.POST.get('priority', 0),
-					attr1 = request.POST.get('attr1', ""),
-					attr2 = request.POST.get('attr2', ""),
-					content = request.POST.get('content', ""),
+					name = data.get('name', 'Note ' + str(Note.objects.filter(owner = request.user.username).count() + 1)),
+					context = data.get('context', 0),
+					active = data.get('active', 0),
+					priority = data.get('priority', 0),
+					attr1 = data.get('attr1', ""),
+					attr2 = data.get('attr2', ""),
+					content = data.get('content', ""),
 				)
 		info["status"] = 0
 		info["newNote"] = note.pk
@@ -72,20 +73,21 @@ def newNote(request):
 def note(request, i = 0):
 	info = dict()
 
+	data = json.loads(request.body)
 	try:
 		note = Note.objects.filter(pk = i)[0]
 
 		if request.method == "POST":
-			if 'name' in request.POST:
-				note.name = request.POST['name']
-			if 'priority' in request.POST:
-				note.priority = request.POST['priority']
-			if 'attr1' in request.POST:
-				note.attr1 = request.POST['attr1'],
-			if 'attr2' in request.POST:
-				note.attr2 = request.POST['attr2'],
-			if 'content' in request.POST:
-				note.content = request.POST['content']
+			if 'name' in data:
+				note.name = data['name']
+			if 'priority' in data:
+				note.priority = data['priority']
+			if 'attr1' in data:
+				note.attr1 = data['attr1'],
+			if 'attr2' in data:
+				note.attr2 = data['attr2'],
+			if 'content' in data:
+				note.content = data['content']
 			note.save();
 			info["status"] = 0
 			info["msg"] = "CHANGED"

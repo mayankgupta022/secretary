@@ -48,9 +48,9 @@ define(function (require) {
                     password: password
                     }, {
                         success: function (data) {
-                            if (data.status === 1 && data.msg === 'invalid')
+                            if (data.attributes.status === 1 && data.attributes.msg === 'invalid')
                                 $('#loginMsg').html('Username and password do not match!');
-                            if (data.status === 1 && data.msg === 'deactivated')
+                            if (data.attributes.status === 1 && data.attributes.msg === 'deactivated')
                                 $('#loginMsg').html('Your account has been deactivated!');
                             else
                                 document.router.navigate("blank", {trigger: true});

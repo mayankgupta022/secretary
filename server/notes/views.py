@@ -13,8 +13,8 @@ def home(request, i = 10):
 
 	try:
 		notes = Note.objects.filter(owner = request.user.username, active = 0).order_by('priority', '-updated')[:i]
-		info["status"] = 0
-		info["notes"] = collection_to_json(notes)
+		# info["status"] = 0
+		info = collection_to_json(notes)
 	except Exception as e:
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))

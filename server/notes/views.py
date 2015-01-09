@@ -73,11 +73,11 @@ def newNote(request):
 def note(request, i = 0):
 	info = dict()
 
-	data = json.loads(request.body)
 	try:
 		note = Note.objects.filter(pk = i)[0]
 
 		if request.method == "POST":
+			data = json.loads(request.body)
 			if 'name' in data:
 				note.name = data['name']
 			if 'priority' in data:

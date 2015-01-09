@@ -24,8 +24,10 @@ define(function (require) {
             "try/:id": "try",
 
             "notes": "notes",
+            "notes/:id": "notes",
             "notes/delNote/:id": "delNote",
             "notes/newNote": "newNote",
+            "notes/note/:id": "note",
             "notes/restoreNote/:id": "restoreNote",
             "notes/trash": "notesTrash"
         },
@@ -98,12 +100,21 @@ define(function (require) {
             });
         },
 
-        notes: function () {
+        note: function (id) {
+            var self = this;
+            require(["notesNote/views/note"], function (NoteView) {
+                var noteView = new NoteView();
+                self.updateCurrentView(noteView);
+                $(noteView.render(menuView, id).el).appendTo($content);
+            });
+        },
+
+        notes: function (id = 0) {
             var self = this;
             require(["notes/views/notes"], function (NotesView) {
                 var notesView = new NotesView();
                 self.updateCurrentView(notesView);
-                $(notesView.render(menuView).el).appendTo($content);
+                $(notesView.render(menuView, id).el).appendTo($content);
             });
         },
 

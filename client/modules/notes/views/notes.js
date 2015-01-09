@@ -11,7 +11,7 @@ define(function (require) {
 
     return Backbone.View.extend({
 
-        render: function (menuView) {
+        render: function (menuView, id) {
             if (menuView) {
                 menuView.updateMenu(model.MenuData);
             }
@@ -19,6 +19,8 @@ define(function (require) {
             this.$el.html(template());
 
             var notes = new model.Notes();
+            if (id)
+                notes.url = notes.url + id + '/';
             notes.fetch({
                     success: function (data) {
                         $('.notesModule').html('');

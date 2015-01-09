@@ -17,6 +17,7 @@ define(function (require) {
             "": "home",
             "blank": "blank",
             "changePass": "changePass",
+            "delNote/:id": "delNote",
             "login": "login",
             "logout": "logout",
             "newNote": "newNote",
@@ -55,6 +56,15 @@ define(function (require) {
                 var changePassView = new ChangePassView();
                 self.updateCurrentView(changePassView);
                 $(changePassView.render(menuView).el).appendTo($content);
+            });
+        },
+
+        delNote: function (id) {
+            var self = this;
+            require(["delNote/views/delNote"], function (DelNoteView) {
+                var delNoteView = new DelNoteView();
+                self.updateCurrentView(delNoteView);
+                $(delNoteView.render(id).el).appendTo($content);
             });
         },
 

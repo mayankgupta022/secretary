@@ -50,12 +50,12 @@ define(function (require) {
             /**********/
 
             "pages": "pages",//done
-            "pages/delPage/:id": "delPage",
-            "pages/newPage": "newPage",
+            "pages/delPage/:id": "delPage",//done
+            "pages/newPage": "newPage",//done
             "pages/page/:id": "page",//done
             "pages/restorePage/:id": "restorePage",
             "pages/trash": "pagesTrash",//done
-            "pages/:id": "pages"
+            "pages/:id": "pages"//done
 
         },
 

@@ -3,20 +3,20 @@ define(function (require) {
     "use strict";
 
     var Backbone = require('backbone'),
-        model    = require('notesDel/models/model');
+        model    = require('pagesDel/models/model');
 
     return Backbone.View.extend({
 
         render: function (id) {
-            var delNote = new model.DelNote();
-            delNote.urlRoot = delNote.urlRoot + id + "/";
-            delNote.save({}, {
+            var delPage = new model.DelPage();
+            delPage.urlRoot = delPage.urlRoot + id + "/";
+            delPage.save({}, {
                     success: function (data) {
                         if (data.status === 1)
                             console.log(data.msg);
                         else
                             console.log(data.attributes);
-                            document.router.navigate("notes", {trigger: true,  replace: true});
+                            document.router.navigate("pages", {trigger: true,  replace: true});
                     },
                     error: function (data) {
                         console.log(data);

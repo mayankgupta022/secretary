@@ -114,22 +114,23 @@ def makeDefaultNotebook(request, i = 0):
 def newNotebook(request):
 	info = dict()
 
+	data = json.loads(request.body)
 	try:
 		notebooks = Notebook.objects.filter(owner = request.user.username)
 		if not notebooks:
 			name = "Default Notebook"
 			priority = 0
 		else:
-			name = request.POST.get('name', 'Notebook ' + str(Notebook.objects.filter(owner = request.user.username).count() + 1))
-			priority = request.POST.get('priority', 1)
+			name = data.get('name', 'Notebook ' + str(Notebook.objects.filter(owner = request.user.username).count() + 1))
+			priority = data.get('priority', 1)
 
 		notebook = Notebook.objects.create(
 					owner = request.user.username,
 					name = name,
-					stack = request.POST.get('stack', 0),
+					stack = data.get('stack', 0),
 					priority = priority,
-					attr1 = request.POST.get('attr1', ""),
-					attr2 = request.POST.get('attr2', "")
+					attr1 = data.get('attr1', ""),
+					attr2 = data.get('attr2', "")
 				)
 		info["status"] = 0
 		info["newNotebook"] = notebook.pk
@@ -144,21 +145,22 @@ def newNotebook(request):
 def newPage(request):
 	info = dict()
 
+	data = json.loads(request.body)
 	try:
-		if 'notebook' in request.POST:
-			notebook = Notebook.objects.filter(owner = request.user.username, notebook = request.POST['notebook'])[0]
+		if 'notebook' in data:
+			notebook = Notebook.objects.filter(owner = request.user.username, notebook = data['notebook'])[0]
 		else:
 			notebook = Notebook.objects.filter(owner = request.user.username, priority = 0)[0]
 		page = Page.objects.create(
 					owner = request.user.username,
-					name = request.POST.get('name', 'Untitled ' + str(Page.objects.filter(owner = request.user.username).count() + 1)),
+					name = data.get('name', 'Untitled ' + str(Page.objects.filter(owner = request.user.username).count() + 1)),
 					notebook = notebook,
-					context = request.POST.get('context', 0),
-					active = request.POST.get('active', 0),
-					priority = request.POST.get('priority', 0),
-					attr1 = request.POST.get('attr1', ""),
-					attr2 = request.POST.get('attr2', ""),
-					content = request.POST.get('content', ""),
+					context = data.get('context', 0),
+					active = data.get('active', 0),
+					priority = data.get('priority', 0),
+					attr1 = data.get('attr1', ""),
+					attr2 = data.get('attr2', ""),
+					content = data.get('content', ""),
 				)
 		info["status"] = 0
 		info["newPage"] = page.pk
@@ -173,13 +175,14 @@ def newPage(request):
 def newStack(request):
 	info = dict()
 
+	data = json.loads(request.body)
 	try:
 		stack = Stack.objects.create(
 					owner = request.user.username,
-					name = request.POST.get('name', 'Stack ' + str(Stack.objects.filter(owner = request.user.username).count() + 1)),
-					priority = request.POST.get('priority', 0),
-					attr1 = request.POST.get('attr1', ""),
-					attr2 = request.POST.get('attr2', "")
+					name = data.get('name', 'Stack ' + str(Stack.objects.filter(owner = request.user.username).count() + 1)),
+					priority = data.get('priority', 0),
+					attr1 = data.get('attr1', ""),
+					attr2 = data.get('attr2', "")
 				)
 		info["status"] = 0
 		info["newStack"] = stack.pk
@@ -194,21 +197,22 @@ def newStack(request):
 def notebook(request, i = 0):
 	info = dict()
 
+	data = json.loads(request.body)
 	try:
 		notebook = Notebook.objects.filter(pk = i)[0]
 
 		if request.method == "POST":
-			if 'name' in request.POST:
-				notebook.name = request.POST['name']
-			if 'stack' in request.POST:
-				notebook.stack = request.POST['stack']
-			if 'priority' in request.POST:
-				if notebook.priority != 0 and request.POST['priority'] !=0:
-					notebook.priority = request.POST['priority']
-			if 'attr1' in request.POST:
-				notebook.attr1 = request.POST['attr1'],
-			if 'attr2' in request.POST:
-				notebook.attr2 = request.POST['attr2'],
+			if 'name' in data:
+				notebook.name = data['name']
+			if 'stack' in data:
+				notebook.stack = data['stack']
+			if 'priority' in data:
+				if notebook.priority != 0 and data['priority'] !=0:
+					notebook.priority = data['priority']
+			if 'attr1' in data:
+				notebook.attr1 = data['attr1'],
+			if 'attr2' in data:
+				notebook.attr2 = data['attr2'],
 			notebook.save();
 			info["msg"] = "CHANGED"
 		else:
@@ -248,18 +252,19 @@ def page(request, i = 0):
 		page = Page.objects.filter(pk = i)[0]
 
 		if request.method == "POST":
-			if 'name' in request.POST:
-				page.name = request.POST['name']
-			if 'notebook' in request.POST:
-				page.notebook = request.POST['notebook']
-			if 'priority' in request.POST:
-				page.priority = request.POST['priority']
-			if 'attr1' in request.POST:
-				page.attr1 = request.POST['attr1'],
-			if 'attr2' in request.POST:
-				page.attr2 = request.POST['attr2'],
-			if 'content' in request.POST:
-				page.content = request.POST['content']
+			data = json.loads(request.body)
+			if 'name' in data:
+				page.name = data['name']
+			if 'notebook' in data:
+				page.notebook = data['notebook']
+			if 'priority' in data:
+				page.priority = data['priority']
+			if 'attr1' in data:
+				page.attr1 = data['attr1'],
+			if 'attr2' in data:
+				page.attr2 = data['attr2'],
+			if 'content' in data:
+				page.content = data['content']
 			page.save();
 			info["msg"] = "CHANGED"
 		else:
@@ -278,18 +283,19 @@ def page(request, i = 0):
 def stack(request, i = 0):
 	info = dict()
 
+	data = json.loads(request.body)
 	try:
 		stack = Stack.objects.filter(pk = i)[0]
 
 		if request.method == "POST":
-			if 'name' in request.POST:
-				stack.name = request.POST['name']
-			if 'priority' in request.POST:
-				stack.priority = request.POST['priority']
-			if 'attr1' in request.POST:
-				stack.attr1 = request.POST['attr1'],
-			if 'attr2' in request.POST:
-				stack.attr2 = request.POST['attr2'],
+			if 'name' in data:
+				stack.name = data['name']
+			if 'priority' in data:
+				stack.priority = data['priority']
+			if 'attr1' in data:
+				stack.attr1 = data['attr1'],
+			if 'attr2' in data:
+				stack.attr2 = data['attr2'],
 			stack.save();
 			info["msg"] = "CHANGED"
 		else:

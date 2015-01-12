@@ -19,9 +19,9 @@ define(function (require) {
             /* COMMON */
             /**********/
 
-            "": "home",
-            "blank": "blank",
-            "try/:id": "try",
+            // "": "home",
+            // "blank": "blank",
+            // "try/:id": "try",
 
             /**********/
             /* USER */
@@ -38,24 +38,24 @@ define(function (require) {
             /**********/
 
             "notes": "notes",
-            "notes/:id": "notes",
             "notes/delNote/:id": "delNote",
             "notes/newNote": "newNote",
             "notes/note/:id": "note",
             "notes/restoreNote/:id": "restoreNote",
             "notes/trash": "notesTrash",
+            "notes/:id": "notes",
 
             /**********/
             /* PAGES */
             /**********/
 
             "pages": "pages",//done
-            "pages/:id": "pages",//done
             "pages/delPage/:id": "delPage",
             "pages/newPage": "newPage",
-            "pages/page/:id": "page",
+            "pages/page/:id": "page",//done
             "pages/restorePage/:id": "restorePage",
-            "pages/trash": "pagesTrash"//done
+            "pages/trash": "pagesTrash",//done
+            "pages/:id": "pages"
 
         },
 

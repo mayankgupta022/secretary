@@ -89,11 +89,11 @@ def note(request, i = 0):
 			if 'content' in data:
 				note.content = data['content']
 			note.save();
-			info["status"] = 0
 			info["msg"] = "CHANGED"
 		else:
-			info["status"] = 0
 			info["msg"] = "NOCHANGE"
+
+		info["status"] = 0
 		info["note"] = model_to_json(note)
 	except Exception as e:
 		info["status"] = 1

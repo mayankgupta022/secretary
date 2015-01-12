@@ -3,20 +3,20 @@ define(function (require) {
     "use strict";
 
     var Backbone = require('backbone'),
-        model    = require('notesRestore/models/model');
+        model    = require('pagesRestore/models/model');
 
     return Backbone.View.extend({
 
         render: function (id) {
-            var restoreNote = new model.RestoreNote();
-            restoreNote.urlRoot = restoreNote.urlRoot + id + "/";
-            restoreNote.save({}, {
+            var restorePage = new model.RestorePage();
+            restorePage.urlRoot = restorePage.urlRoot + id + "/";
+            restorePage.save({}, {
                     success: function (data) {
                         if (data.status === 1)
                             console.log(data.msg);
                         else
                             console.log(data.attributes);
-                            document.router.navigate("notes", {trigger: true,  replace: true});
+                            document.router.navigate("pages", {trigger: true,  replace: true});
                     },
                     error: function (data) {
                         console.log(data);

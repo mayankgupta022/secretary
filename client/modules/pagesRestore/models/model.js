@@ -4,12 +4,12 @@ define(function (require) {
 
     var Backbone = require('backbone'),
 
-        RestoreNote = Backbone.Model.extend({
-            urlRoot : document.serverURL + 'notes/restoreNote/'
+        RestorePage = Backbone.Model.extend({
+            urlRoot : document.serverURL + 'pages/restorePage/'
             });
 
     return {
-        RestoreNote: RestoreNote
+        RestorePage: RestorePage
     };
 
 

@@ -13,8 +13,8 @@ def home(request, i = 10):
 
 	try:
 		pages = Page.objects.filter(owner = request.user.username, active = 0).order_by('-updated')[:i]
-		info["status"] = 0
-		info["pages"] = collection_to_json(pages)
+		# info["status"] = 0
+		info = collection_to_json(pages)
 	except Exception as e:
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))

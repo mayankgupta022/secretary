@@ -43,7 +43,20 @@ define(function (require) {
             "notes/newNote": "newNote",
             "notes/note/:id": "note",
             "notes/restoreNote/:id": "restoreNote",
-            "notes/trash": "notesTrash"
+            "notes/trash": "notesTrash",
+
+            /**********/
+            /* PAGES */
+            /**********/
+
+            "pages": "pages",
+            "pages/:id": "pages",
+            "pages/delPage/:id": "delPage",
+            "pages/newPage": "newPage",
+            "pages/page/:id": "page",
+            "pages/restorePage/:id": "restorePage",
+            "pages/trash": "pagesTrash"
+
         },
 
 /**********/
@@ -107,7 +120,7 @@ define(function (require) {
             }
             this.currentView=newView;
             this.currentView.delegateEvents(); // delegate events when the view is recycled
-        }
+        },
 
 /**********/
 /* USER */
@@ -218,6 +231,67 @@ define(function (require) {
                 $(notesTrashView.render(menuView).el).appendTo($content);
             });
         },
+
+/**********/
+/* PAGES */
+/**********/
+
+        delPage: function (id) {
+            var self = this;
+            require(["pagesDel/views/delPage"], function (DelPageView) {
+                var delPageView = new DelPageView();
+                self.updateCurrentView(delPageView);
+                $(delPageView.render(id).el).appendTo($content);
+            });
+        },
+
+        newPage: function () {
+            var self = this;
+            require(["pagesNew/views/newPage"], function (NewPageView) {
+                var newPageView = new NewPageView();
+                self.updateCurrentView(newPageView);
+                $(newPageView.render().el).appendTo($content);
+            });
+        },
+
+        page: function (id) {
+            var self = this;
+            require(["pagesPage/views/page"], function (PageView) {
+                var pageView = new PageView();
+                self.updateCurrentView(pageView);
+                $(pageView.render(menuView, id).el).appendTo($content);
+            });
+        },
+
+        pages: function (id) {
+
+            if(!id)
+                id = 0;
+            var self = this;
+            require(["pages/views/pages"], function (PagesView) {
+                var pagesView = new PagesView();
+                self.updateCurrentView(pagesView);
+                $(pagesView.render(menuView, id).el).appendTo($content);
+            });
+        },
+
+        restorePage: function (id) {
+            var self = this;
+            require(["pagesRestore/views/restorePage"], function (RestorePageView) {
+                var restorePageView = new RestorePageView();
+                self.updateCurrentView(restorePageView);
+                $(restorePageView.render(id).el).appendTo($content);
+            });
+        },
+
+        pagesTrash: function () {
+            var self = this;
+            require(["pagesTrash/views/trash"], function (PagesTrashView) {
+                var pagesTrashView = new PagesTrashView();
+                self.updateCurrentView(pagesTrashView);
+                $(pagesTrashView.render(menuView).el).appendTo($content);
+            });
+        }
 
     });
 

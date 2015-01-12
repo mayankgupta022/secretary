@@ -49,13 +49,13 @@ define(function (require) {
             /* PAGES */
             /**********/
 
-            "pages": "pages",
-            "pages/:id": "pages",
+            "pages": "pages",//done
+            "pages/:id": "pages",//done
             "pages/delPage/:id": "delPage",
             "pages/newPage": "newPage",
             "pages/page/:id": "page",
             "pages/restorePage/:id": "restorePage",
-            "pages/trash": "pagesTrash"
+            "pages/trash": "pagesTrash"//done
 
         },
 

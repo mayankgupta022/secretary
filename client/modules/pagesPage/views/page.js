@@ -3,9 +3,9 @@ define(function (require) {
     "use strict";
 
     var Backbone = require('backbone'),
-        model    = require('notesNote/models/model'),
-        tpl      = require('text!notesNote/tpl/note.html'),
-        note,
+        model    = require('pagesPage/models/model'),
+        tpl      = require('text!pagesPage/tpl/page.html'),
+        page,
         readyToUpdate,
 
         template = _.template(tpl);
@@ -13,10 +13,10 @@ define(function (require) {
     return Backbone.View.extend({
 
         events: {
-            "click #submit" : "note",
+            "click #submit" : "page",
             "keydown" : "onkeydown",
-            "change #noteName": "updateNote",
-            "change #noteContent": "updateNote"
+            "change #pageName": "updatePage",
+            "change #pageContent": "updatePage"
         },
 
         onkeydown: function(e) {
@@ -32,16 +32,16 @@ define(function (require) {
             this.readyToUpdate = 1;
         },
 
-        updateNote: function() {
+        updatePage: function() {
             var self = this;
 
-            var name = $('#noteName').val(),
+            var name = $('#pageName').val(),
                 priority = 0,
             //  attr1
             //  attr2
-                content = $('#noteContent').val();
+                content = $('#pageContent').val();
 
-            self.note.save({
+            self.page.save({
                     name: name,
                     priority: priority,
                     // attr1: attr1,
@@ -49,7 +49,7 @@ define(function (require) {
                     content: content
                     }, {
                         success: function (data) {
-                            console.log(self.note.attributes);
+                            console.log(self.page.attributes);
                         },
                         error: function (data) {
                             console.log(data);
@@ -61,10 +61,10 @@ define(function (require) {
 
         refresh: function() {
             var self = this;
-            this.note.fetch({
+            this.page.fetch({
                     success: function (data) {
                         console.log(data.attributes);            
-                        self.$el.html(template(data.attributes.note));
+                        self.$el.html(template(data.attributes.page));
                     },
                     error: function (data) {
                         console.log("data");
@@ -78,14 +78,14 @@ define(function (require) {
             if (menuView) {
                 menuView.updateMenu(model.MenuData);
             }
-            self.note =new model.Note();
-            self.note.urlRoot = self.note.urlRoot + id + '/';
+            self.page =new model.Page();
+            self.page.urlRoot = self.page.urlRoot + id + '/';
             self.refresh();
             self.readyToUpdate = 0;
             setInterval(function(){
                 console.log(self.readyToUpdate);
                 if (self.readyToUpdate) {
-                    self.updateNote();
+                    self.updatePage();
                 } 
             }, 5000);
 

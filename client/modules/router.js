@@ -56,7 +56,7 @@ define(function (require) {
             "pages/notebook/:id": "notebook",//done
             "pages/notebooks": "notebooks",//done
             "pages/stack/:id": "stack",//done
-            "pages/stacks": "stacks",
+            "pages/stacks": "stacks",//done
 
 
             "pages/delPage/:id": "delPage",//done
@@ -310,15 +310,15 @@ define(function (require) {
             });
         },
 
-        // stacks: function () {
+        stacks: function () {
 
-        //     var self = this;
-        //     require(["pagesStacks/views/stacks"], function (StacksView) {
-        //         var stacksView = new StacksView();
-        //         self.updateCurrentView(stacksView);
-        //         $(stacksView.render(menuView).el).appendTo($content);
-        //     });
-        // },
+            var self = this;
+            require(["pagesStacks/views/stacks"], function (StacksView) {
+                var stacksView = new StacksView();
+                self.updateCurrentView(stacksView);
+                $(stacksView.render(menuView).el).appendTo($content);
+            });
+        },
 
         delPage: function (id) {
             var self = this;

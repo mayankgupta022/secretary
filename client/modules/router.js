@@ -48,10 +48,10 @@ define(function (require) {
             /**********/
             /* PAGES */
             /**********/
-            "pages/delNotebook/:id": "delNotebook",
+            "pages/delNotebook/:id": "delNotebook",//done
             "pages/delStack/:id": "delStack",
             "pages/makeDefaultNotebook/:id": "makeDefaultNotebook",
-            "pages/newNotebook": "newNotebook",
+            "pages/newNotebook": "newNotebook",//done
             "pages/newStack": "newStack",
             "pages/notebook/:id": "notebook",
             "pages/notebooks/:id": "notebooks",
@@ -59,7 +59,7 @@ define(function (require) {
             "pages/stacks/:id": "stacks",
 
 
-            "pages/delPage/:id": "delPage",//done0
+            "pages/delPage/:id": "delPage",//done
             "pages/newPage": "newPage",//done
             "pages/page/:id": "page",//done
             "pages/restorePage/:id": "restorePage",//done
@@ -261,6 +261,24 @@ define(function (require) {
                 var newNotebookView = new NewNotebookView();
                 self.updateCurrentView(newNotebookView);
                 $(newNotebookView.render().el).appendTo($content);
+            });
+        },
+
+        delStack: function (id) {
+            var self = this;
+            require(["pagesDelStack/views/delStack"], function (DelStackView) {
+                var delStackView = new DelStackView();
+                self.updateCurrentView(delStackView);
+                $(delStackView.render(id).el).appendTo($content);
+            });
+        },
+
+        newStack: function () {
+            var self = this;
+            require(["pagesNewStack/views/newStack"], function (NewStackView) {
+                var newStackView = new NewStackView();
+                self.updateCurrentView(newStackView);
+                $(newStackView.render().el).appendTo($content);
             });
         },
 

@@ -4,12 +4,12 @@ define(function (require) {
 
     var Backbone = require('backbone'),
 
-        DelNote = Backbone.Model.extend({
-            urlRoot : document.serverURL + 'notes/delNote/'
+        DelStack = Backbone.Model.extend({
+            urlRoot : document.serverURL + 'pages/delStack/'
             });
 
     return {
-        DelNote: DelNote
+        DelStack: DelStack
     };
 
 

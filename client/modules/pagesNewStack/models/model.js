@@ -4,12 +4,12 @@ define(function (require) {
 
     var Backbone = require('backbone'),
 
-        NewNote = Backbone.Model.extend({
-            urlRoot : document.serverURL + 'notes/newNote/'
+        NewStack = Backbone.Model.extend({
+            urlRoot : document.serverURL + 'pages/newStack/'
             });
 
     return {
-        NewNote: NewNote
+        NewStack: NewStack
     };
 
 

@@ -235,8 +235,7 @@ def notebooks(request):
 
 	try:
 		notebooks = Notebook.objects.filter(owner = request.user.username).order_by('priority', 'name')
-		info["status"] = 0
-		info["notebooks"] = collection_to_json(notebooks)
+		info = collection_to_json(notebooks)
 	except Exception as e:
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
@@ -318,8 +317,7 @@ def stacks(request):
 
 	try:
 		stacks = Stack.objects.filter(owner = request.user.username).order_by('priority', 'name')
-		info["status"] = 0
-		info["stacks"] = collection_to_json(stacks)
+		info = collection_to_json(stacks)
 	except Exception as e:
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))

@@ -3,9 +3,9 @@ define(function (require) {
     "use strict";
 
     var Backbone = require('backbone'),
-        model    = require('notes/models/model'),
-        NoteView    = require('notes/views/note'),
-        tpl      = require('text!notes/tpl/notes.html'),
+        model    = require('pagesNotebooks/models/model'),
+        NotebookView    = require('pagesNotebooks/views/notebook'),
+        tpl      = require('text!pagesNotebooks/tpl/notebooks.html'),
 
         template = _.template(tpl);
 
@@ -18,15 +18,15 @@ define(function (require) {
 
             this.$el.html(template());
 
-            var notes = new model.Notes();
+            var notebooks = new model.Notebooks();
             if (id)
-                notes.url = notes.url + id + '/';
-            notes.fetch({
+                notebooks.url = notebooks.url + id + '/';
+            notebooks.fetch({
                     success: function (data) {
-                        $('.notesModule').html('');
-                        notes.each(function(note) {
-                            // console.log(note.attributes);
-                            $('.notesModule').append(new NoteView({model: note}).render().el);
+                        $('.notebooksModule').html('');
+                        notebooks.each(function(notebook) {
+                            // console.log(notebook.attributes);
+                            $('.notebooksModule').append(new NotebookView({model: notebook}).render().el);
                         });
                     },
                     error: function (data) {

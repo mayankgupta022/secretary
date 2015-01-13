@@ -194,3 +194,61 @@ body {
 .my-pages-attr1-1 {
     background-color: #aaaaff;
 }
+
+
+/************/
+/*NOTEBOOKS*/
+/************/
+
+.my-notebooks {
+    margin-bottom: 6px;
+    box-shadow: 0px 0px 1px 1px #D0D0D0;
+    padding: 5px;
+    height: 70px;
+    font-size: 12px;
+    background-color: #efefef;
+}
+
+.my-notebooks a {
+    text-decoration: none;
+    color: #444444;
+}
+
+.my-notebooks div>div {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.my-notebooks-attr1-1 {
+    background-color: #aaaaff;
+}
+
+/************/
+/*NOTEBOOK*/
+/************/
+
+.my-notebook {
+    font-size: 12px;
+}
+
+.my-notebook div>div {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 50px;
+}
+
+.my-notebook input {
+    font-size: 18px;
+    width: 100%;
+}
+
+.my-notebook textarea {
+    min-width: 100%;
+    max-width: 100%;
+    height: 200px;
+    line-height: 18px;
+}
+.my-notebooks-attr1-1 {
+    background-color: #aaaaff;
+}

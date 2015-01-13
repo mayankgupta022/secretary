@@ -48,24 +48,24 @@ define(function (require) {
             /**********/
             /* PAGES */
             /**********/
-            "pages/delNotebook/:id": "delNotebook",//done
-            "pages/delStack/:id": "delStack",//done
+            "pages/delNotebook/:id": "delNotebook",
+            "pages/delStack/:id": "delStack",
             "pages/makeDefaultNotebook/:id": "makeDefaultNotebook",
-            "pages/newNotebook": "newNotebook",//done
-            "pages/newStack": "newStack",//done
-            "pages/notebook/:id": "notebook",//done
-            "pages/notebooks": "notebooks",//done
-            "pages/stack/:id": "stack",//done
-            "pages/stacks": "stacks",//done
+            "pages/newNotebook": "newNotebook",
+            "pages/newStack": "newStack",
+            "pages/notebook/:id": "notebook",
+            "pages/notebooks": "notebooks",
+            "pages/stack/:id": "stack",
+            "pages/stacks": "stacks",
 
 
-            "pages/delPage/:id": "delPage",//done
-            "pages/newPage": "newPage",//done
-            "pages/page/:id": "page",//done
-            "pages/restorePage/:id": "restorePage",//done
-            "pages/trash": "pagesTrash",//done
-            "pages": "pages",//done
-            "pages/:id": "pages"//done
+            "pages/delPage/:id": "delPage",
+            "pages/newPage": "newPage",
+            "pages/page/:id": "page",
+            "pages/restorePage/:id": "restorePage",
+            "pages/trash": "pagesTrash",
+            "pages": "pages",
+            "pages/:id": "pages"
 
         },
 
@@ -279,6 +279,15 @@ define(function (require) {
                 var newStackView = new NewStackView();
                 self.updateCurrentView(newStackView);
                 $(newStackView.render().el).appendTo($content);
+            });
+        },
+
+        makeDefaultNotebook: function (id) {
+            var self = this;
+            require(["pagesMakeDefaultNotebook/views/makeDefaultNotebook"], function (MakeDefaultNotebookView) {
+                var makeDefaultNotebookView = new MakeDefaultNotebookView();
+                self.updateCurrentView(makeDefaultNotebookView);
+                $(makeDefaultNotebookView.render(id).el).appendTo($content);
             });
         },
 

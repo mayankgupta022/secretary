@@ -24,6 +24,7 @@ define(function (require) {
             notes.fetch({
                     success: function (data) {
                         $('.notesModule').html('');
+                        console.log(notes);
                         notes.each(function(note) {
                             // console.log(note.attributes);
                             $('.notesModule').append(new NoteView({model: note}).render().el);

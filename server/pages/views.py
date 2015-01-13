@@ -197,11 +197,11 @@ def newStack(request):
 def notebook(request, i = 0):
 	info = dict()
 
-	data = json.loads(request.body)
 	try:
 		notebook = Notebook.objects.filter(pk = i)[0]
 
 		if request.method == "POST":
+			data = json.loads(request.body)
 			if 'name' in data:
 				notebook.name = data['name']
 			if 'stack' in data:
@@ -283,11 +283,11 @@ def page(request, i = 0):
 def stack(request, i = 0):
 	info = dict()
 
-	data = json.loads(request.body)
 	try:
 		stack = Stack.objects.filter(pk = i)[0]
 
 		if request.method == "POST":
+			data = json.loads(request.body)
 			if 'name' in data:
 				stack.name = data['name']
 			if 'priority' in data:
@@ -304,7 +304,7 @@ def stack(request, i = 0):
 		childNotebooks = Notebook.objects.filter(stack = stack.pk).order_by('priority', 'name')
 		info["status"] = 0
 		info["stack"] = model_to_json(stack)
-		info["childNotebooks"] = collection_to_json(childPages)
+		info["childNotebooks"] = collection_to_json(childNotebooks)
 	except Exception as e:
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))

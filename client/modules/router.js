@@ -49,14 +49,14 @@ define(function (require) {
             /* PAGES */
             /**********/
             "pages/delNotebook/:id": "delNotebook",//done
-            "pages/delStack/:id": "delStack",
+            "pages/delStack/:id": "delStack",//done
             "pages/makeDefaultNotebook/:id": "makeDefaultNotebook",
             "pages/newNotebook": "newNotebook",//done
-            "pages/newStack": "newStack",
-            "pages/notebook/:id": "notebook",
-            "pages/notebooks/:id": "notebooks",
+            "pages/newStack": "newStack",//done
+            "pages/notebook/:id": "notebook",//done
+            "pages/notebooks": "notebooks",
             "pages/stack/:id": "stack",
-            "pages/stacks/:id": "stacks",
+            "pages/stacks": "stacks",
 
 
             "pages/delPage/:id": "delPage",//done
@@ -281,6 +281,26 @@ define(function (require) {
                 $(newStackView.render().el).appendTo($content);
             });
         },
+
+        notebook: function (id) {
+            var self = this;
+            require(["pagesNotebook/views/notebook"], function (NotebookView) {
+                var notebookView = new NotebookView();
+                self.updateCurrentView(notebookView);
+                $(notebookView.render(menuView, id).el).appendTo($content);
+            });
+        },
+
+        notebooks: function () {
+
+            var self = this;
+            require(["pagesNotebooks/views/notebooks"], function (NotebooksView) {
+                var notebooksView = new NotebooksView();
+                self.updateCurrentView(notebooksView);
+                $(notebooksView.render(menuView).el).appendTo($content);
+            });
+        },
+
 
         delPage: function (id) {
             var self = this;

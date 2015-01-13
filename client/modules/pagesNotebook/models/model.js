@@ -54,13 +54,13 @@ define(function (require) {
             }
         },
 
-        Notes = Backbone.Collection.extend({
-            url : document.serverURL + 'notes/'
+        Notebook = Backbone.Model.extend({
+            urlRoot : document.serverURL + 'pages/notebook/'
             });
 
     return {
         MenuData: menuData,
-        Notes: Notes
+        Notebook: Notebook
     };
 
 

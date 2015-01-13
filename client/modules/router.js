@@ -37,24 +37,34 @@ define(function (require) {
             /* NOTES */
             /**********/
 
-            "notes": "notes",
             "notes/delNote/:id": "delNote",
             "notes/newNote": "newNote",
             "notes/note/:id": "note",
             "notes/restoreNote/:id": "restoreNote",
             "notes/trash": "notesTrash",
+            "notes": "notes",
             "notes/:id": "notes",
 
             /**********/
             /* PAGES */
             /**********/
+            "pages/delNotebook/:id": "delNotebook",
+            "pages/delStack/:id": "delStack",
+            "pages/makeDefaultNotebook/:id": "makeDefaultNotebook",
+            "pages/newNotebook": "newNotebook",
+            "pages/newStack": "newStack",
+            "pages/notebook/:id": "notebook",
+            "pages/notebooks/:id": "notebooks",
+            "pages/stack/:id": "stack",
+            "pages/stacks/:id": "stacks",
 
-            "pages": "pages",//done
-            "pages/delPage/:id": "delPage",//done
+
+            "pages/delPage/:id": "delPage",//done0
             "pages/newPage": "newPage",//done
             "pages/page/:id": "page",//done
-            "pages/restorePage/:id": "restorePage",
+            "pages/restorePage/:id": "restorePage",//done
             "pages/trash": "pagesTrash",//done
+            "pages": "pages",//done
             "pages/:id": "pages"//done
 
         },
@@ -235,6 +245,24 @@ define(function (require) {
 /**********/
 /* PAGES */
 /**********/
+
+        delNotebook: function (id) {
+            var self = this;
+            require(["pagesDelNotebook/views/delNotebook"], function (DelNotebookView) {
+                var delNotebookView = new DelNotebookView();
+                self.updateCurrentView(delNotebookView);
+                $(delNotebookView.render(id).el).appendTo($content);
+            });
+        },
+
+        newNotebook: function () {
+            var self = this;
+            require(["pagesNewNotebook/views/newNotebook"], function (NewNotebookView) {
+                var newNotebookView = new NewNotebookView();
+                self.updateCurrentView(newNotebookView);
+                $(newNotebookView.render().el).appendTo($content);
+            });
+        },
 
         delPage: function (id) {
             var self = this;

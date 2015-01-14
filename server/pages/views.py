@@ -114,8 +114,8 @@ def makeDefaultNotebook(request, i = 0):
 def newNotebook(request):
 	info = dict()
 
-	data = json.loads(request.body)
 	try:
+		data = json.loads(request.body)
 		notebooks = Notebook.objects.filter(owner = request.user.username)
 		if not notebooks:
 			name = "Default Notebook"
@@ -145,8 +145,8 @@ def newNotebook(request):
 def newPage(request):
 	info = dict()
 
-	data = json.loads(request.body)
 	try:
+		data = json.loads(request.body)
 		if 'notebook' in data:
 			notebook = Notebook.objects.filter(owner = request.user.username, notebook = data['notebook'])[0]
 		else:
@@ -175,8 +175,8 @@ def newPage(request):
 def newStack(request):
 	info = dict()
 
-	data = json.loads(request.body)
 	try:
+		data = json.loads(request.body)
 		stack = Stack.objects.create(
 					owner = request.user.username,
 					name = data.get('name', 'Stack ' + str(Stack.objects.filter(owner = request.user.username).count() + 1)),

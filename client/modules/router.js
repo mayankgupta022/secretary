@@ -19,9 +19,9 @@ define(function (require) {
             /* COMMON */
             /**********/
 
-            // "": "home",
-            // "blank": "blank",
-            // "try/:id": "try",
+            "": "home",
+            "blank": "blank",
+            "try/:id": "try",
 
             /**********/
             /* USER */
@@ -57,8 +57,6 @@ define(function (require) {
             "pages/notebooks": "notebooks",
             "pages/stack/:id": "stack",
             "pages/stacks": "stacks",
-
-
             "pages/delPage/:id": "delPage",
             "pages/newPage": "newPage",
             "pages/page/:id": "page",

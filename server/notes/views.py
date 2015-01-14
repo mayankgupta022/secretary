@@ -48,8 +48,8 @@ def delNote(request, i = -1):
 def newNote(request):
 	info = dict()
 
-	data = json.loads(request.body)
 	try:
+		data = json.loads(request.body)
 		note = Note.objects.create(
 					owner = request.user.username,
 					name = data.get('name', 'Note ' + str(Note.objects.filter(owner = request.user.username).count() + 1)),

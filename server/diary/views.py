@@ -14,8 +14,7 @@ def home(request, i = 10):
 
 	try:
 		events = Event.objects.filter(calender = Calender.objects.filter(owner = request.user.username), active = 0, end__gt = datetime.now()).order_by('start')[:i]
-		info["status"] = 0
-		info["events"] = collection_to_json(events)
+		info = collection_to_json(events)
 	except Exception as e:
 		info["status"] = 1
 		info["msg"] = e.message + str(type(e))
@@ -31,12 +30,13 @@ def day(request, i = 0):
 		day = Day.objects.filter(pk = i)[0]
 
 		if request.method == "POST":
-			if 'content' in request.POST:
-				day.content = request.POST['content']
-			if 'attr1' in request.POST:
-				day.attr1 = request.POST['attr1'],
-			if 'attr2' in request.POST:
-				day.attr2 = request.POST['attr2'],
+			data = json.loads(request.body)
+			if 'content' in data:
+				day.content = data['content']
+			if 'attr1' in data:
+				day.attr1 = data['attr1'],
+			if 'attr2' in data:
+				day.attr2 = data['attr2'],
 			day.save();
 			info["msg"] = "CHANGED"
 		else:
@@ -135,21 +135,22 @@ def newCalender(request):
 	info = dict()
 
 	try:
+		data = json.loads(request.body)
 		calenders = Calender.objects.filter(owner = request.user.username)
 		if not calenders:
 			name = "Default Calender"
 			priority = 0
 		else:
-			name = request.POST.get('name', 'Calender ' + str(Calender.objects.filter(owner = request.user.username).count() + 1))
-			priority = request.POST.get('priority', 1)
+			name = data.get('name', 'Calender ' + str(Calender.objects.filter(owner = request.user.username).count() + 1))
+			priority = data.get('priority', 1)
 
 		calender = Calender.objects.create(
 					owner = request.user.username,
 					name = name,
 					priority = priority,
-					active = request.POST.get('active', 0),
-					attr1 = request.POST.get('attr1', ""),
-					attr2 = request.POST.get('attr2', "")
+					active = data.get('active', 0),
+					attr1 = data.get('attr1', ""),
+					attr2 = data.get('attr2', "")
 				)
 		info["status"] = 0
 		info["newCalender"] = calender.pk
@@ -165,22 +166,23 @@ def newEvent(request):
 	info = dict()
 
 	try:
-		if 'calender' in request.POST:
-			calender = Calender.objects.filter(owner = request.user.username, calender = request.POST['calender'])[0]
+		data = json.loads(request.body)
+		if 'calender' in data:
+			calender = Calender.objects.filter(owner = request.user.username, calender = data['calender'])[0]
 		else:
 			calender = Calender.objects.filter(owner = request.user.username, priority = 0)[0]
 		event = Event.objects.create(
-					name = request.POST.get('name', 'Untitled ' + str(Event.objects.filter(calender = calender).count() + 1)),
+					name = data.get('name', 'Untitled ' + str(Event.objects.filter(calender = calender).count() + 1)),
 					calender = calender,
-					start = request.POST.get('start', datetime.now()),
-					end = request.POST.get('end', datetime.now()),
-					remind = request.POST.get('remind', 0),
-					reminder = request.POST.get('reminder', datetime.now()),
-					priority = request.POST.get('priority', 0),
-					active = request.POST.get('active', 0),
-					attr1 = request.POST.get('attr1', ""),
-					attr2 = request.POST.get('attr2', ""),
-					desc = request.POST.get('content', ""),
+					start = data.get('start', datetime.now()),
+					end = data.get('end', datetime.now()),
+					remind = data.get('remind', 0),
+					reminder = data.get('reminder', datetime.now()),
+					priority = data.get('priority', 0),
+					active = data.get('active', 0),
+					attr1 = data.get('attr1', ""),
+					attr2 = data.get('attr2', ""),
+					desc = data.get('content', ""),
 				)
 		info["status"] = 0
 		info["newEvent"] = event.pk
@@ -196,15 +198,16 @@ def newDay(request):
 	info = dict()
 
 	try:
-		date = request.POST.get('date', datetime.now().date())
+		data = json.loads(request.body)
+		date = data.get('date', datetime.now().date())
 		if Day.objects.filter(date = date).count():
 			return day(request, Day.objects.filter(date = date)[0].pk)
 		else:
 			nDay = Day.objects.create(
 						owner = request.user.username,
 						date = date,
-						attr1 = request.POST.get('attr1', ""),
-						attr2 = request.POST.get('attr2', "")
+						attr1 = data.get('attr1', ""),
+						attr2 = data.get('attr2', "")
 					)
 			events = Event.objects.filter(calender = Calender.objects.filter(owner = request.user.username), start__lte = datetime.combine(date + timedelta(days=1), datetime.min.time()), end__gte = datetime.combine(date, datetime.min.time())).order_by('priority','start')
 			for event in events:
@@ -223,18 +226,19 @@ def calender(request, i = 0):
 	info = dict()
 
 	try:
+		data = json.loads(request.body)
 		calender = Calender.objects.filter(pk = i)[0]
 
 		if request.method == "POST":
-			if 'name' in request.POST:
-				calender.name = request.POST['name']
-			if 'priority' in request.POST:
-				if calender.priority != 0 and request.POST['priority'] !=0:
-					calender.priority = request.POST['priority']
-			if 'attr1' in request.POST:
-				calender.attr1 = request.POST['attr1'],
-			if 'attr2' in request.POST:
-				calender.attr2 = request.POST['attr2'],
+			if 'name' in data:
+				calender.name = data['name']
+			if 'priority' in data:
+				if calender.priority != 0 and data['priority'] !=0:
+					calender.priority = data['priority']
+			if 'attr1' in data:
+				calender.attr1 = data['attr1'],
+			if 'attr2' in data:
+				calender.attr2 = data['attr2'],
 			calender.save();
 			info["msg"] = "CHANGED"
 		else:
@@ -274,29 +278,30 @@ def event(request, i = 0):
 	info = dict()
 
 	try:
+		data = json.loads(request.body)
 		event = Event.objects.filter(pk = i)[0]
 
 		if request.method == "POST":
-			if 'name' in request.POST:
-				event.name = request.POST['name']
-			if 'calender' in request.POST:
-				event.calender = request.POST['calender']
-			if 'start' in request.POST:
-				event.start = request.POST['start']
-			if 'end' in request.POST:
-				event.end = request.POST['end']
-			if 'remind' in request.POST:
-				event.remind = request.POST['remind']
-			if 'reminder' in request.POST:
-				event.reminder = request.POST['reminder']
-			if 'priority' in request.POST:
-				event.priority = request.POST['priority']
-			if 'attr1' in request.POST:
-				event.attr1 = request.POST['attr1'],
-			if 'attr2' in request.POST:
-				event.attr2 = request.POST['attr2'],
-			if 'desc' in request.POST:
-				event.desc = request.POST['desc']
+			if 'name' in data:
+				event.name = data['name']
+			if 'calender' in data:
+				event.calender = data['calender']
+			if 'start' in data:
+				event.start = data['start']
+			if 'end' in data:
+				event.end = data['end']
+			if 'remind' in data:
+				event.remind = data['remind']
+			if 'reminder' in data:
+				event.reminder = data['reminder']
+			if 'priority' in data:
+				event.priority = data['priority']
+			if 'attr1' in data:
+				event.attr1 = data['attr1'],
+			if 'attr2' in data:
+				event.attr2 = data['attr2'],
+			if 'desc' in data:
+				event.desc = data['desc']
 			event.save();
 			info["msg"] = "CHANGED"
 		else:

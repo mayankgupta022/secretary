@@ -63,7 +63,13 @@ define(function (require) {
             "pages/restorePage/:id": "restorePage",
             "pages/trash": "pagesTrash",
             "pages": "pages",
-            "pages/:id": "pages"
+            "pages/:id": "pages",
+
+            /**********/
+            /* DIARY */
+            /**********/
+            "diary": "diaryEvents",
+            "diary/event/:id": "diaryEvent"
 
         },
 
@@ -382,7 +388,24 @@ define(function (require) {
                 self.updateCurrentView(pagesTrashView);
                 $(pagesTrashView.render(menuView).el).appendTo($content);
             });
+        },
+
+/**********/
+/* DIARY */
+/**********/
+
+        diaryEvents: function (id) {
+
+            if(!id)
+                id = 0;
+            var self = this;
+            require(["diaryEvents/views/events"], function (EventsView) {
+                var eventsView = new EventsView();
+                self.updateCurrentView(eventsView);
+                $(eventsView.render(menuView, id).el).appendTo($content);
+            });
         }
+
 
     });
 

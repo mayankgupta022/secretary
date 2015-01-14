@@ -1,0 +1,25 @@
+<div class="eventModule my-events my-events-attr1-<%= attr1 %>">
+	<a href="#diaryEvents/event/<%= id %>">
+		<div class="row">
+			<div class="col-xs-6 text-left">
+				<span class="h5 bold"><%= name %></span>
+			</div>
+			<div class="col-xs-2"></div>
+			<div class="col-xs-4 text-right bold">
+				<span>Created <%= created %></span>
+			</div>
+			<div class="col-xs-12 text-left">
+				<span class="bold">Updated <%= updated %></span>
+				<%= desc %>
+				<%= start %>
+				<%= end %>
+				<% if (remind) { %>
+					<%= reminder %>
+				<% } %>
+				
+			</div>
+			<div><%= attr2 %></div>
+		</div>
+	</a>
+
+</div>

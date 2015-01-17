@@ -278,10 +278,10 @@ def event(request, i = 0):
 	info = dict()
 
 	try:
-		data = json.loads(request.body)
 		event = Event.objects.filter(pk = i)[0]
 
 		if request.method == "POST":
+			data = json.loads(request.body)
 			if 'name' in data:
 				event.name = data['name']
 			if 'calender' in data:

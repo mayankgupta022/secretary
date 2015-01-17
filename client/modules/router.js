@@ -68,8 +68,8 @@ define(function (require) {
             /**********/
             /* DIARY */
             /**********/
-            "diary": "diaryEvents",
-            "diary/event/:id": "diaryEvent",
+            "diary": "events",//done
+            "diary/event/:id": "event",
             "diary/day/:id": "day",
             "diary/delDay/:id": "delDay",
             "diary/delCalender/:id": "delCalender",
@@ -82,7 +82,7 @@ define(function (require) {
             "diary/calenders": "calenders",
             "diary/restoreEvent/:id": "restoreEvent",
             "diary/trash": "trash",
-            "diary/:id": "diaryEvents"
+            "diary/:id": "diaryEvents"//done
         },
 
 /**********/
@@ -406,7 +406,16 @@ define(function (require) {
 /* DIARY */
 /**********/
 
-        diaryEvents: function (id) {
+        event: function (id) {
+            var self = this;
+            require(["diaryEvent/views/event"], function (EventView) {
+                var eventView = new EventView();
+                self.updateCurrentView(eventView);
+                $(eventView.render(menuView, id).el).appendTo($content);
+            });
+        },
+
+        events: function (id) {
 
             if(!id)
                 id = 0;
@@ -417,7 +426,6 @@ define(function (require) {
                 $(eventsView.render(menuView, id).el).appendTo($content);
             });
         }
-
 
     });
 

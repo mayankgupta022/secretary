@@ -69,8 +69,20 @@ define(function (require) {
             /* DIARY */
             /**********/
             "diary": "diaryEvents",
-            "diary/event/:id": "diaryEvent"
-
+            "diary/event/:id": "diaryEvent",
+            "diary/day/:id": "day",
+            "diary/delDay/:id": "delDay",
+            "diary/delCalender/:id": "delCalender",
+            "diary/delEvent/:id": "delEvent",
+            "diary/makeDefaultCalender/:id": "makeDefaultCalender",
+            "diary/newDay": "newDay",
+            "diary/newCalender": "newCalender",
+            "diary/newEvent": "newEvent",
+            "diary/calender/:id": "calender",
+            "diary/calenders": "calenders",
+            "diary/restoreEvent/:id": "restoreEvent",
+            "diary/trash": "trash",
+            "diary/:id": "diaryEvents"
         },
 
 /**********/

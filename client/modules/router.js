@@ -69,7 +69,7 @@ define(function (require) {
             /* DIARY */
             /**********/
             "diary": "events",//done
-            "diary/event/:id": "event",
+            "diary/event/:id": "event",//done
             "diary/day/:id": "day",
             "diary/delDay/:id": "delDay",
             "diary/delCalender/:id": "delCalender",
@@ -412,6 +412,24 @@ define(function (require) {
                 var eventView = new EventView();
                 self.updateCurrentView(eventView);
                 $(eventView.render(menuView, id).el).appendTo($content);
+            });
+        },
+
+        delEvent: function (id) {
+            var self = this;
+            require(["diaryDelEvent/views/delEvent"], function (DelEventView) {
+                var delEventView = new DelEventView();
+                self.updateCurrentView(delEventView);
+                $(delEventView.render(id).el).appendTo($content);
+            });
+        },
+
+        newEvent: function () {
+            var self = this;
+            require(["diaryNewEvent/views/newEvent"], function (NewEventView) {
+                var newEventView = new NewEventView();
+                self.updateCurrentView(newEventView);
+                $(newEventView.render().el).appendTo($content);
             });
         },
 
